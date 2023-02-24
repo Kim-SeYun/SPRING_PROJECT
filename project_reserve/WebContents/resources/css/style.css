@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+ a {
+	color: gray;
+}
+
+ ul.join {
+ 	color: gray;
+	list-style-type: '|  ';
+	margin-left: 200px;
+}
+ 
+ li.join {
+	float: left;
+	margin-right: 30px;
+	
+}
+
+
