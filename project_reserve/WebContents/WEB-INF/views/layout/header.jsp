@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
@@ -19,3 +20,49 @@
 </head>
 <body>
 
+<nav class="navbar navbar-expand-sm navbar-dark justify-content-between" style="background-color: #4682B4">
+
+  <a class="navbar-brand" href="${contextPath}">Logo</a>
+  
+
+  <ul class="navbar-nav">
+  
+  <form class="form-inline" action="/action_page.php">
+    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+    <button class="btn btn-success" type="submit">Search</button>
+  </form>
+
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        더 보기
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="${contextPath}/board/notice">공지사항</a>
+        <a class="dropdown-item" href="#">문의사항</a>
+        <a class="dropdown-item" href="#">이벤트</a>
+      </div>
+    </li>
+    
+    <li class="nav-item">
+	     <sec:authorize access="isAnonymous()"><!-- 권한이 없는 경우  -->
+	      	<a class="nav-link" href="${contextPath}/member/login">로그인</a>
+		</sec:authorize>
+		<sec:authorize access="isAuthenticated()"> <!-- 권한이 있는 경우  -->
+			<p class="nav-link"><sec:authentication property="principal.username"/></p> <!-- 로그인 id-->
+		<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_SUB_ADMIN')">
+			<a href="${contextPath}/member/admin">관리자페이지</a><br>
+		</sec:authorize>
+		<sec:authorize access="hasAnyRole('ROLE_REGULAR_MEMBER','ROLE_ASSOCIATE_MEMBER')">
+			<a href="${contextPath}/member/mypage">나의정보보기</a><br>
+		</sec:authorize>
+			<form action="${contextPath}/member/logout" method="post"> <!-- 기본값 : /logout -->
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+				<button class="btn btn-primary">로그아웃</button>
+			</form> 
+		</sec:authorize>
+    </li>
+    <!-- <li class="nav-item">
+      <a class="nav-link" href="#">Link 2</a>
+    </li> -->
+  </ul>
+</nav>

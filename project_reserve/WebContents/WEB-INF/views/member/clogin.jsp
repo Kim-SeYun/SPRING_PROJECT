@@ -4,7 +4,7 @@
 
 <div class="container">
 	<div class="jumbotron">
-		<h2>회원 로그인</h2>
+		<h2>기업 로그인</h2>
 	</div>
 	<ul class="nav nav-tabs nav-justified mt-3" role="tablist" style="width:312px; margin:0 auto;">
 		<li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" style="color:black;" href="${contextPath}/member/login">고객 로그인</a></li>

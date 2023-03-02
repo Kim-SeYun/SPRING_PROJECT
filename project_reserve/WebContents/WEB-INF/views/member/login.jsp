@@ -4,6 +4,7 @@
 
 <div class="container">
 	<div class="jumbotron">
+		<h2><a class="navbar-brand" href="${contextPath}">Logo</a></h2>
 		<h2>회원 로그인</h2>
 	</div>
 	<ul class="nav nav-tabs nav-justified mt-3" role="tablist" style="width:312px; margin:0 auto;">
