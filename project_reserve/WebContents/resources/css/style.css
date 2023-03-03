@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+/* header */
 .container {
   position: relative;
   top: 50px;
@@ -20,6 +21,41 @@
 	margin-right: 30px;
 	
 }
+
+/* board list */
+
+nav.notice ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav.notice {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 50px;
+}
+
+table.table {
+  margin-left: 200px; /* nav와 table 사이 간격 조절 */
+  margin-top: -70px; /* table을 위로 이동 */
+  vertical-align: top;
+  
+}
+
+td, th {
+  height: 100px;
+}
+
+ul.pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin-top: 20px; /* 원래 있던 margin-top */
+}
+
+/* index.jsp */
 
 .tab {
 	width: 800px;

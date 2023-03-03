@@ -19,7 +19,7 @@ public class Pagination {
 	public Pagination(Criteria criteria, int totalCount) {
 		this.criteria = criteria;
 		this.totalCount = totalCount;
-		displayPageNum = 10; 
+		displayPageNum = 7; 
 		endPage = (int) Math.ceil(criteria.getPage()/(double)displayPageNum)*displayPageNum;
 		startPage = endPage - displayPageNum + 1;
 		

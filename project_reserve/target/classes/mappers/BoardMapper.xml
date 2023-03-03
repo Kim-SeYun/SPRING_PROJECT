@@ -20,7 +20,4 @@
 		]]>
 	</select>
 	
-	<select id="detail" resultType="boardVO">
-		select * from board_reserve where bno = #{bno}
-	</select>
 </mapper>

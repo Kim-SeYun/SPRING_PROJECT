@@ -13,7 +13,4 @@ public interface BoardRepository {
 		// 게시물 목록
 		List<BoardVO> list(Criteria criteria);
 		
-		// 상세페이지 
-		BoardVO detail(Long bno);
-
 }
