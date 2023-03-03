@@ -6,6 +6,8 @@
 	<div class="jumbotron">
 		<h1>공지사항</h1>
 	</div>
+	
+	
 </div>
 
 <%@ include file="../layout/footer.jsp" %>

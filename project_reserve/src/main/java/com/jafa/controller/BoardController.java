@@ -11,8 +11,8 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/board")
 public class BoardController {
 	
-	@GetMapping("/notice")
-	public void notice() {
+	@GetMapping("/list")
+	public void list() {
 		
 	}
 

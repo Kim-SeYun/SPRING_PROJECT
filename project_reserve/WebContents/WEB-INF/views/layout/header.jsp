@@ -42,6 +42,10 @@
         <a class="dropdown-item" href="#">이벤트</a>
       </div>
     </li>
+   
+    <li class="nav-item">
+      <a class="nav-link" href="#">예약내역</a>
+    </li>
     
     <li class="nav-item">
 	     <sec:authorize access="isAnonymous()"><!-- 권한이 없는 경우  -->
@@ -61,8 +65,5 @@
 			</form> 
 		</sec:authorize>
     </li>
-    <!-- <li class="nav-item">
-      <a class="nav-link" href="#">Link 2</a>
-    </li> -->
   </ul>
 </nav>
