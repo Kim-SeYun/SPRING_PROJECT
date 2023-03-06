@@ -20,4 +20,9 @@
 		]]>
 	</select>
 	
+	<insert id="write" keyProperty="bno" useGeneratedKeys="true" keyColumn="bno">
+		insert into board_reserve(bno,title,content,writer)
+		values(board_reserve_seq.nextval,#{title},#{content},#{writer})
+	</insert>
+	
 </mapper>

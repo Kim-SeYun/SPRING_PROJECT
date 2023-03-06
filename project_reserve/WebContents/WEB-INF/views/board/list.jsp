@@ -12,6 +12,20 @@
 		</ul>
 	</nav>
 	
+    <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_SUB_ADMIN')">
+        <a href="${contextPath}/board/write" class="btn btn-info write">글쓰기</a>
+    </sec:authorize>
+	
+	
+	<style>
+		table.table {
+		  margin-left: 200px; /* nav와 table 사이 간격 조절 */
+		  margin-top: -70px; /* table을 위로 이동 */
+		  vertical-align: top;
+		  
+		}
+	</style>
+	
 	<table class="table">
 		<tr>
 			<th>공지사항</th>

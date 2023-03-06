@@ -52,18 +52,25 @@
 	     <sec:authorize access="isAnonymous()"><!-- 권한이 없는 경우  -->
 	      	<a class="nav-link" href="${contextPath}/member/login">로그인</a>
 		</sec:authorize>
-		<sec:authorize access="isAuthenticated()"> <!-- 권한이 있는 경우  -->
-			<p class="nav-link"><sec:authentication property="principal.username"/></p> <!-- 로그인 id-->
-		<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_SUB_ADMIN')">
-			<a href="${contextPath}/member/admin">관리자페이지</a><br>
-		</sec:authorize>
-		<sec:authorize access="hasAnyRole('ROLE_REGULAR_MEMBER','ROLE_ASSOCIATE_MEMBER')">
-			<a href="${contextPath}/member/mypage">나의정보보기</a><br>
-		</sec:authorize>
-			<form action="${contextPath}/member/logout" method="post"> <!-- 기본값 : /logout -->
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-				<button class="btn btn-primary">로그아웃</button>
-			</form> 
+		<sec:authorize access="isAuthenticated()">
+		    <div class="dropdown">
+		        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-toggle="dropdown">
+		            <sec:authentication property="principal.username"/>
+		        </a>
+		        <div class="dropdown-menu dropdown-menu-right">
+		            <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_SUB_ADMIN')">
+		                <a class="dropdown-item" href="${contextPath}/member/admin">관리자페이지</a>
+		            </sec:authorize>
+		            <sec:authorize access="hasAnyRole('ROLE_REGULAR_MEMBER','ROLE_ASSOCIATE_MEMBER')">
+		                <a class="dropdown-item" href="${contextPath}/member/mypage">나의정보보기</a>
+		            </sec:authorize>
+		            <div class="dropdown-divider"></div>
+		            <form action="${contextPath}/member/logout" method="post">
+		                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+		                <button class="dropdown-item" type="submit">로그아웃</button>
+		            </form>
+		        </div>
+		    </div>
 		</sec:authorize>
     </li>
   </ul>

@@ -4,4 +4,5 @@ $(document).ready(function() {
         var preview = $(this).siblings('.content-preview');
         preview.toggle();
     });
+    
 });
