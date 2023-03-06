@@ -43,7 +43,7 @@
 							<a href="#" class="title-link">
 								${b.title}
 							</a>
-							<div class="content-preview" style="display: none;">
+							<div class="content-preview" style="display: none; white-space: pre-line;">
 	                            ${b.content}
 	                        </div>
 						</td>
