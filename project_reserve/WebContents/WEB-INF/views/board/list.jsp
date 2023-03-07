@@ -6,23 +6,24 @@
 	
 	<nav class="notice">
 		<ul>
-			<li><a href="${contextPath}/board/list">공지사항</a></li>
-			<li>문의사항</li>
-			<li>이벤트</li>
+			<h2>더 보기</h2><br>
+			<li><a href="${contextPath}/board/list"><h5>공지사항</h5></a></li>
+			<li><a href="#"><h5>문의사항</h5></a></li>
+			<li><a href="${contextPath}/board/event"><h5>이벤트</h5></a></li>
 		</ul>
 	</nav>
 	
     <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_SUB_ADMIN')">
-        <a href="${contextPath}/board/write" class="btn btn-info write">글쓰기</a>
+        <a href="${contextPath}/board/write" class="btn btn-info write" style="float: right;">글쓰기</a>
     </sec:authorize>
 	
 	
 	<style>
 		table.table {
 		  margin-left: 200px; /* nav와 table 사이 간격 조절 */
-		  margin-top: -70px; /* table을 위로 이동 */
+		  margin-top: -100px; /* table을 위로 이동 */
 		  vertical-align: top;
-		  
+		  width: 800px;
 		}
 	</style>
 	
@@ -41,11 +42,16 @@
 					<tr>
 						<td>
 							<a href="#" class="title-link">
+								<input type="hidden" name="bno" value="${b.bno}">
 								${b.title}
 							</a>
 							<div class="content-preview" style="display: none; white-space: pre-line;">
 	                            ${b.content}
 	                        </div>
+	                        <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_SUB_ADMIN')">
+						        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" class="token">
+						        <a class="btn btn-danger remove" style="float: right;">삭제</a>
+						    </sec:authorize>
 						</td>
 					</tr>
 				</c:forEach>
@@ -75,3 +81,21 @@
 </div>
 
 <%@ include file="../layout/footer.jsp" %>
+
+<script>
+$(function(){
+ 
+    
+    $('.remove').click(function(){
+        let bno = $(this).closest('tr').find('input[name="bno"]').val();
+		let form = $('<form/>')
+		form.attr('method','post')
+			.attr('action', '${contextPath}/board/remove?bno=' + bno)
+			.append($('.token'))
+			.appendTo('body')
+			.submit();
+	})	
+});
+	
+</script> 
+

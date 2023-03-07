@@ -25,4 +25,8 @@
 		values(board_reserve_seq.nextval,#{title},#{content},#{writer})
 	</insert>
 	
+	<delete id="remove">
+		delete from board_reserve where bno = #{bno}
+	</delete>
+	
 </mapper>

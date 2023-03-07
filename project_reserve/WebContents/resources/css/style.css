@@ -6,6 +6,10 @@
   top: 50px;
 }
 
+nav.navbar {
+	height: 100px;
+}
+
  a {
 	color: gray;
 }

@@ -15,4 +15,7 @@ public interface BoardRepository {
 		
 	// 글쓰기
 	void write(BoardVO vo);
+	
+	// 글삭제
+	void remove(Long bno);
 }
