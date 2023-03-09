@@ -11,6 +11,7 @@
 			<td>번호</td>
 			<td>제목</td>
 			<td>내용</td>
+			<td>첨부파일개수</td>
 		</tr>
 		<c:forEach items="${list}" var="b">
 		<tr>
@@ -19,6 +20,7 @@
 				<a href="${contextPath}/event/detail?bno=${b.bno}">${b.title}</a>
 			</td>
 			<td>${b.content}</td>
+			<td>${b.attachFileCnt}</td>
 		</tr>		
 		</c:forEach>
 	</table>

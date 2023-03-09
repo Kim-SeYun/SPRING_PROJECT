@@ -11,5 +11,7 @@ public interface AttachRepository {
 	void save(@Param("attachList") List<AttachVO> attachList);
 	
 	List<AttachVO> list(Long bno);
+	
+	AttachVO detail(Long attachNo);
 
 }

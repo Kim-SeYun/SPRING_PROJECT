@@ -12,5 +12,16 @@
 	    insert into board_file(bno, title, content)
 	    values (bno_file_seq.nextval, #{title}, #{content})
 	</insert>
+	
+	<update id="updateAttachFileCnt">
+    	update board_file 
+    	set
+    		attachFileCnt = (select count(bno) from attach_file where bno=#{bno})
+    	where bno = #{bno} 
+    </update>
+	
+	<select id="detail" resultType="eventVO">
+		select * from board_file where bno = #{bno}
+	</select>
 
 </mapper>

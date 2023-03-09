@@ -10,5 +10,8 @@ public interface EventRepository {
 	
 	void write(EventVO vo);
 	
+	void updateAttachFileCnt(Long bno);
+	
+	EventVO detail(Long bno);
 
 }

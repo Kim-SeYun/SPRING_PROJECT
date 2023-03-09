@@ -17,4 +17,8 @@
 	<select id="list" resultType="attachVO">
 		select * from attach_file where bno = #{bno}
 	</select>
+	
+	<select id="detail" resultType="attachVO">
+		select * from attach_file where attachNo = #{attachNo}
+	</select>
 </mapper>

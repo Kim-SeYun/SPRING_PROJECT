@@ -35,7 +35,12 @@ public class EventService {
 		List<AttachVO> attachList = fileUploadUtils.getAttachVOAndUpload(vo.getBno(), multipartFiles);
 		if(!attachList.isEmpty()) {
 			attachRepository.save(attachList);
+			eventRepository.updateAttachFileCnt(vo.getBno());
 		}
+	}
+	
+	public EventVO detail(Long bno) {
+		return eventRepository.detail(bno);
 	}
 	
 

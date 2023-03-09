@@ -36,8 +36,6 @@ public class EventRepositoryTest extends AppTest{
 		EventVO vo = EventVO.builder()
 				.title("aa")
 				.content("dd")
-				.writer("dd")
-				.fileName("ddd")
 				.build();
 		eventRepository.write(vo);
 	
