@@ -40,7 +40,7 @@
       <div class="dropdown-menu">
         <a class="dropdown-item" href="${contextPath}/board/list">공지사항</a>
         <a class="dropdown-item" href="#">문의사항</a>
-        <a class="dropdown-item" href="${contextPath}/board/event">이벤트</a>
+        <a class="dropdown-item" href="${contextPath}/event/list">이벤트</a>
       </div>
     </li>
    

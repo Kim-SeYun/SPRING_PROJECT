@@ -14,8 +14,11 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+import com.jafa.domain.AttachVO;
 import com.jafa.domain.BoardVO;
+import com.jafa.domain.EventVO;
 import com.jafa.domain.MemberVO;
 
 @Configuration
@@ -48,7 +51,7 @@ public class RootConfig {
 		SqlSessionFactoryBean factory = new SqlSessionFactoryBean();
 		factory.setDataSource(dataSource());
 		factory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mappers/**/*Mapper.xml"));
-		factory.setTypeAliases(MemberVO.class, BoardVO.class);
+		factory.setTypeAliases(MemberVO.class, BoardVO.class, EventVO.class, AttachVO.class);
 		return factory;
 	}
 	
@@ -68,6 +71,15 @@ public class RootConfig {
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
 		return new PropertySourcesPlaceholderConfigurer();
+	}
+	
+	// 파일업로드 설정 
+	@Bean
+	public CommonsMultipartResolver multipartResolver() {
+		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+		multipartResolver.setDefaultEncoding("utf-8");
+		multipartResolver.setMaxUploadSize(-1);
+		return multipartResolver;
 	}
 	
 }
