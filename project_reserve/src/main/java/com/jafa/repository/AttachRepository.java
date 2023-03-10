@@ -13,5 +13,7 @@ public interface AttachRepository {
 	List<AttachVO> list(Long bno);
 	
 	AttachVO detail(Long attachNo);
+	
+	void remove(Long attachNo);
 
 }

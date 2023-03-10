@@ -42,8 +42,10 @@ public class EventController {
 	AttachService attachService;
 	
 	@GetMapping("/list")
-	public String list(Model model) {
-		model.addAttribute("list", eventService.list());		
+	public String list(Model model, Long bno) {
+		model.addAttribute("list", eventService.list());
+//		List<AttachVO> attachList = attachService.list(bno);
+//		model.addAttribute("attachList", attachList);
 		return "event/list";
 	}
 	
@@ -80,6 +82,12 @@ public class EventController {
 		headers.add("Content-Type", fileNameMap.getContentTypeFor(fileName));
 		
 		return new ResponseEntity<byte[]>(FileCopyUtils.copyToByteArray(file),headers,HttpStatus.OK);
+	}
+	
+	@PostMapping("/remove")
+	public String remove(Long bno) {
+		eventService.remove(bno);
+		return "redirect:/event/list";
 	}
 
 }

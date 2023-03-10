@@ -25,6 +25,17 @@
 		</c:forEach>
 	</table>
 	
+	<%-- <table class="table">
+		<tr>
+			<td>파일이름</td>
+		</tr>
+		<c:forEach items="attachList" var="attach">
+			<tr>
+				<td>${attach.fileName}</td>
+			</tr>
+		</c:forEach>
+	</table> --%>
+	
 	<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_SUB_ADMIN')">
         <a href="${contextPath}/event/write" class="btn btn-info">글쓰기</a>
     </sec:authorize>

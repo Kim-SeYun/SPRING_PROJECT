@@ -24,11 +24,26 @@
 	</c:if>
 	
 	<div>
-		<button class="btn btn-warning modBoard">수정</button>
-		<button class="btn btn-danger delBoard">삭제</button>
-		<a href="${contextPath}/event/list" type="submit" class="btn btn-info">목록</a>
+		<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_SUB_ADMIN')">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" class="token">
+			<button class="btn btn-warning modEvent">수정</button>
+			<button class="btn btn-danger delEvent">삭제</button>
+			<a href="${contextPath}/event/list" type="submit" class="btn btn-info">목록</a>
+		</sec:authorize>
 	</div>
 	
 </div>
 
 <%@ include file="../layout/footer.jsp" %>
+
+<script>
+$(function(){
+	$('.delEvent').on('click', function(){
+		$('<form/>').attr('method', 'post')
+			.attr('action', '${contextPath}/event/remove?bno=${b.bno}')
+			.append($('.token'))
+			.appendTo('body')
+			.submit();
+	})
+})
+</script>

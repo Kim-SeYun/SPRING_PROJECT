@@ -21,4 +21,8 @@
 	<select id="detail" resultType="attachVO">
 		select * from attach_file where attachNo = #{attachNo}
 	</select>
+	
+	<delete id="remove">
+		delete from attach_file where attachNo = #{attachNo}
+	</delete>
 </mapper>

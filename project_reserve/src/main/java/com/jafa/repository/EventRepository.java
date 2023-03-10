@@ -13,5 +13,7 @@ public interface EventRepository {
 	void updateAttachFileCnt(Long bno);
 	
 	EventVO detail(Long bno);
+	
+	void remove(Long bno);
 
 }

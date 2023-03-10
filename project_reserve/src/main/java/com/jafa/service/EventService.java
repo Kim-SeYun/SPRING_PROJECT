@@ -43,5 +43,13 @@ public class EventService {
 		return eventRepository.detail(bno);
 	}
 	
+	public void remove(Long bno) {
+		List<AttachVO> list = attachRepository.list(bno);
+		if(!list.isEmpty()) {
+			fileUploadUtils.deleteAllFile(bno);
+		}
+		eventRepository.remove(bno);
+	}
+	
 
 }

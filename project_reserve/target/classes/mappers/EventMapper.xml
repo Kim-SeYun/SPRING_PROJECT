@@ -23,5 +23,9 @@
 	<select id="detail" resultType="eventVO">
 		select * from board_file where bno = #{bno}
 	</select>
+	
+	<delete id="remove">
+		delete from board_file where bno = #{bno}
+	</delete>
 
 </mapper>
