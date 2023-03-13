@@ -45,5 +45,13 @@ $(function(){
 			.appendTo('body')
 			.submit();
 	})
+	
+	$('.modEvent').on('click', function(){
+		$('<form/>').attr('method', 'get')
+			.attr('action', '${contextPath}/event/modify')
+			.append('<input type="hiddne" value="${b.bno}" name="bno">')
+			.appendTo('body')
+			.submit();
+	})
 })
 </script>

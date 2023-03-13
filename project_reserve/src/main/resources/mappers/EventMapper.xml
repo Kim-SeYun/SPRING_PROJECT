@@ -27,5 +27,12 @@
 	<delete id="remove">
 		delete from board_file where bno = #{bno}
 	</delete>
+	
+	<update id="modify">
+		update board_file set
+		title = #{title},
+		content = #{content}
+		where bno = #{bno}
+	</update>
 
 </mapper>

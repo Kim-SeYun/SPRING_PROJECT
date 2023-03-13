@@ -15,5 +15,7 @@ public interface EventRepository {
 	EventVO detail(Long bno);
 	
 	void remove(Long bno);
+	
+	void modify(EventVO vo);
 
 }

@@ -42,10 +42,8 @@ public class EventController {
 	AttachService attachService;
 	
 	@GetMapping("/list")
-	public String list(Model model, Long bno) {
+	public String list(Model model) {
 		model.addAttribute("list", eventService.list());
-//		List<AttachVO> attachList = attachService.list(bno);
-//		model.addAttribute("attachList", attachList);
 		return "event/list";
 	}
 	
@@ -87,6 +85,23 @@ public class EventController {
 	@PostMapping("/remove")
 	public String remove(Long bno) {
 		eventService.remove(bno);
+		return "redirect:/event/list";
+	}
+	
+	@GetMapping("/modify")
+	public void modify(Long bno, Model model) {
+		EventVO vo = eventService.detail(bno);
+		model.addAttribute("b", vo);
+		if(vo.getAttachFileCnt()>0) {
+			List<AttachVO> attachList = attachService.list(bno);
+			model.addAttribute("attachList", attachList);
+		}
+	}
+	
+	@PostMapping("/modify")
+	public String modify(EventVO vo, RedirectAttributes rttr, @RequestParam(value = "delFileList") List<Long> delFileList, 
+			@RequestParam(value = "attachFile") MultipartFile[] multipartFiles) {
+		eventService.modify(vo, delFileList, multipartFiles);
 		return "redirect:/event/list";
 	}
 

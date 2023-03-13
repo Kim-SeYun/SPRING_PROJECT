@@ -1,5 +1,6 @@
 package com.jafa.service;
 
+import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,23 @@ public class EventService {
 			fileUploadUtils.deleteAllFile(bno);
 		}
 		eventRepository.remove(bno);
+	}
+	
+	public void modify(EventVO vo, List<Long> delfileList, MultipartFile[] multipartFiles) {
+		if(!delfileList.isEmpty()) {
+			for(Long attachNo : delfileList) {
+				AttachVO attachVO = attachRepository.detail(attachNo);
+				new File(attachVO.getFilePath()).delete();
+				attachRepository.remove(attachNo);
+			}
+		}
+		eventRepository.modify(vo);
+		
+		List<AttachVO> attachList = fileUploadUtils.getAttachVOAndUpload(vo.getBno(), multipartFiles);
+		if(!attachList.isEmpty()) {
+			attachRepository.save(attachList);
+		}
+		eventRepository.updateAttachFileCnt(vo.getBno());
 	}
 	
 
