@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.jafa.repository.HotelRepository">
+	<sql id="condition">
+		<trim prefix="and">
+			<choose>
+				<when test="type=='N'.toString()">
+					name like '%' ||#{keyword}||'%'
+				</when>
+				<when test="type=='A'.toString()">
+					address like '%' ||#{keyword}||'%'
+				</when>
+				<when test="type=='P'.toString()">
+					price like '%' ||#{keyword}||'%'
+				</when>
+			</choose>
+		</trim>
+		<if test="category != null and category != ''">
+	    	and category = #{category}
+    	</if>
+	</sql>
+
+	<select id="list" resultType="hotelVO">
+		<!-- <![CDATA[
+		select 
+		    rn, bno, category, name, address, price
+		from
+		(
+		    select 
+		        /*+ index_desc(hotel_reserve pk_hotel_reserve) */
+		        rownum as rn, bno, category, name, address, price
+		    from 
+		        hotel_reserve
+		    where rownum <= #{maxRow}
+		]]>
+			<include refid="condition"/>
+		<![CDATA[
+		) 
+		where rn > #{minRow}
+		]]> -->
+		select * from hotel_reserve 
+		<where>
+	    	<include refid="condition"/>
+	    </where>
+	</select>
+	
+	<select id="getTotalCount" resultType="int">
+		select count(*) from hotel_reserve
+		<where>
+	    	<include refid="condition"/>
+	    </where>
+	</select>
+	
+</mapper>

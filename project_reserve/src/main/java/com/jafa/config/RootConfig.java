@@ -19,6 +19,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import com.jafa.domain.AttachVO;
 import com.jafa.domain.BoardVO;
 import com.jafa.domain.EventVO;
+import com.jafa.domain.HotelVO;
 import com.jafa.domain.MemberVO;
 
 @Configuration
@@ -51,7 +52,7 @@ public class RootConfig {
 		SqlSessionFactoryBean factory = new SqlSessionFactoryBean();
 		factory.setDataSource(dataSource());
 		factory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mappers/**/*Mapper.xml"));
-		factory.setTypeAliases(MemberVO.class, BoardVO.class, EventVO.class, AttachVO.class);
+		factory.setTypeAliases(MemberVO.class, BoardVO.class, EventVO.class, AttachVO.class, HotelVO.class);
 		return factory;
 	}
 	

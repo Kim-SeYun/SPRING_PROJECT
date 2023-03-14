@@ -9,11 +9,21 @@
 	
 	<div class="tab">
 		<div class="tabmenu">
-			<div>모텔</div>
-			<div>호텔·리조트</div>
-			<div>펜션</div>
-			<div>게스트하우스</div>
-			<div>캠핑·글램핑</div>
+			<div>
+				<a href="${contextPath}/list/motel">모텔</a>
+			</div>
+			<div>
+				<a href="${contextPath}/list/hotel">호텔·리조트</a>
+			</div>
+			<div>
+				<a href="${contextPath}/list/pension">펜션</a>
+			</div>
+			<div>
+				<a href="${contextPath}/list/guesthouse">게스트하우스</a>
+			</div>
+			<div>
+				<a href="${contextPath}/list/camping">캠핑·글램핑</a>
+			</div>
 		</div>
 	</div>
 	
