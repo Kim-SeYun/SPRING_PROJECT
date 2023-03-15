@@ -28,7 +28,7 @@
 
   <ul class="navbar-nav">
   
-  <form class="form-inline" action="/action_page.php">
+  <form class="form-inline" action="">
     <input class="form-control mr-sm-2" type="text" placeholder="Search">
     <button class="btn btn-success" type="submit">Search</button>
   </form>
@@ -39,7 +39,7 @@
       </a>
       <div class="dropdown-menu">
         <a class="dropdown-item" href="${contextPath}/board/list">공지사항</a>
-        <a class="dropdown-item" href="#">문의사항</a>
+        <a class="dropdown-item" href="${contextPath}/inquiry/list">문의사항</a>
         <a class="dropdown-item" href="${contextPath}/event/list">이벤트</a>
       </div>
     </li>

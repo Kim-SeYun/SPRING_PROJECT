@@ -8,7 +8,7 @@
 		<ul>
 			<h2>더 보기</h2><br>
 			<li><a href="${contextPath}/board/list"><h5>공지사항</h5></a></li>
-			<li><a href="#"><h5>문의사항</h5></a></li>
+			<li><a href="${contextPath}/inquiry/list"><h5>문의사항</h5></a></li>
 			<li><a href="${contextPath}/event/list"><h5>이벤트</h5></a></li>
 		</ul>
 	</nav>
