@@ -44,6 +44,8 @@ public class EventController {
 	@GetMapping("/list")
 	public String list(Model model) {
 		model.addAttribute("list", eventService.list());
+		List<AttachVO> attachList = attachService.listAll();
+		model.addAttribute("attachList", attachList);
 		return "event/list";
 	}
 	

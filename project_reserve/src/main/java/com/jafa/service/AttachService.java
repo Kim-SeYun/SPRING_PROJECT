@@ -18,5 +18,9 @@ public class AttachService {
 		return attachRepository.list(bno);
 	}
 	
+	public List<AttachVO> listAll(){
+		return attachRepository.listAll();
+	}
+	
 
 }

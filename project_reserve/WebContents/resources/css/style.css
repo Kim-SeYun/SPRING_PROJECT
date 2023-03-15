@@ -122,3 +122,11 @@ ul.pagination {
 .box button:hover {
   background-color: #3e8e41;
 }
+
+/* event list */
+
+.event-list {
+  list-style-type: none;
+  margin: 10px 0;
+}
+

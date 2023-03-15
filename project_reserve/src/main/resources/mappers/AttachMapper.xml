@@ -18,6 +18,10 @@
 		select * from attach_file where bno = #{bno}
 	</select>
 	
+	<select id="listAll" resultType="attachVO">
+		select * from attach_file
+	</select>
+	
 	<select id="detail" resultType="attachVO">
 		select * from attach_file where attachNo = #{attachNo}
 	</select>

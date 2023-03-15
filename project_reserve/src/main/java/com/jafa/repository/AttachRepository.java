@@ -15,5 +15,6 @@ public interface AttachRepository {
 	AttachVO detail(Long attachNo);
 	
 	void remove(Long attachNo);
-
+	
+	List<AttachVO> listAll();
 }
