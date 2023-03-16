@@ -14,26 +14,36 @@
 		</ul>
 	</nav>
 	
-	
+	<style>
+		table.table {
+		  margin-left: 200px; 
+		  margin-top: -150px; 
+		  vertical-align: top;
+		  width: 800px;
+		}
+	</style>
 	
 	<table class="table">
 		<tr>
 			<th>번호</th>
+			<th>문의유형</th>
 			<th>제목</th>
-			<th>내용</th>
 			<th>작성자</th>
 			<th>작성일자</th>
 		</tr>
 		<c:forEach items="${list}" var="i">
 			<tr>
 				<td>${i.bno}</td>
-				<td>${i.title}</td>
-				<td>${i.content}</td>
+				<td>${i.type}</td>
+				<td><a href="${contextPath}/inquiry/detail?bno=${i.bno}">${i.title}</a></td>
 				<td>${i.writer}</td>
 				<td>${i.writeDate}</td>
+				
 			</tr>
 		</c:forEach>
 	</table>
+	
+	<a href="${contextPath}/inquiry/write" class="btn btn-info">문의하기</a>
 	
 	
 </div>

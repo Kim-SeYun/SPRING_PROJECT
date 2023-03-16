@@ -1,6 +1,7 @@
 package com.jafa.domain;
 
-import java.util.Date;
+
+import java.sql.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,6 +20,7 @@ public class InquiryVO {
 	private Long bno; 
 	private String title; 
 	private String content; 
+	private String type;
 	private String writer; 
 	private Date writeDate;
 

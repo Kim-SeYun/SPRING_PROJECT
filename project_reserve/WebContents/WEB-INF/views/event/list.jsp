@@ -19,6 +19,7 @@
 		  display: inline-block;
 		  vertical-align: top;
 		  margin-left: 50px;
+		  margin-top: 70px;
 		}	
 	</style>
 	

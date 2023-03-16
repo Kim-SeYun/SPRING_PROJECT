@@ -14,6 +14,11 @@ nav.navbar {
 	color: gray;
 }
 
+a:hover {
+	text-decoration: none;
+	color: inherit;
+}
+
  ul.join {
  	color: gray;
 	list-style-type: '|  ';
@@ -56,7 +61,7 @@ ul.pagination {
 
 .tab {
 	width: 800px;
-	margin: 0px auto; 
+	margin: 0px auto;
 }
 
 .tabmenu > div {
@@ -66,6 +71,10 @@ ul.pagination {
 	line-height: 50px;
 	text-align: center;
 	cursor: pointer;
+}
+
+.event {
+	margin-top: 100px;
 }
 
 .event-box {

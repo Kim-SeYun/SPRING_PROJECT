@@ -8,6 +8,12 @@ public interface InquiryRepository {
 	
 	List<InquiryVO> list();
 	
+	InquiryVO detail(Long bno);
+	
+	void remove(Long bno);
+	
+	void write(InquiryVO vo);
+	
 	
 
 }

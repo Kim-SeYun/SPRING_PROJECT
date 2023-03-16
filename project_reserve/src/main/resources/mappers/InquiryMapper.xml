@@ -9,5 +9,18 @@
 		select * from inquiry_reserve
 	</select>
 	
+	<select id="detail" resultType="inquiryVO">
+		select * from inquiry_reserve where bno = #{bno}
+	</select>
+	
+	<delete id="remove">
+		delete from inquiry_reserve where bno = #{bno}
+	</delete>
+	
+	<insert id="write" useGeneratedKeys="true" keyColumn="bno" keyProperty="bno">
+	    insert into inquiry_reserve (bno, title, content, writer, type)
+	    values (inquiry_reserve_seq.nextval, #{title}, #{content}, #{writer}, #{type})
+	</insert>
+	
 
 </mapper>

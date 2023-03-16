@@ -17,5 +17,17 @@ public class InquiryService {
 	public List<InquiryVO> list(){
 		return inquiryRepository.list();
 	}
+	
+	public InquiryVO detail(Long bno) {
+		return inquiryRepository.detail(bno);
+	}
+	
+	public void remove(Long bno) {
+		inquiryRepository.remove(bno);
+	}
+	
+	public void write(InquiryVO vo) {
+		inquiryRepository.write(vo);
+	}
 
 }

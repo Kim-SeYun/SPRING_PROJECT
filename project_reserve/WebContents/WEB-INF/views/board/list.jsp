@@ -21,7 +21,7 @@
 	<style>
 		table.table {
 		  margin-left: 200px; /* nav와 table 사이 간격 조절 */
-		  margin-top: -100px; /* table을 위로 이동 */
+		  margin-top: -150px; /* table을 위로 이동 */
 		  vertical-align: top;
 		  width: 800px;
 		}
@@ -40,9 +40,8 @@
 			<c:otherwise>
 				<c:forEach items="${list}" var="b">
 					<tr>
-						<td>
+						<td class="title-td">
 							<a href="#" class="title-link">
-								<input type="hidden" name="bno" value="${b.bno}">
 								${b.title}
 							</a>
 							<div class="content-preview" style="display: none; white-space: pre-line;">
