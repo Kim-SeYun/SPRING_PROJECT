@@ -29,5 +29,9 @@ public class InquiryService {
 	public void write(InquiryVO vo) {
 		inquiryRepository.write(vo);
 	}
+	
+	public void modify(InquiryVO vo) {
+		inquiryRepository.modify(vo);
+	}
 
 }

@@ -16,7 +16,7 @@
 	</style>
 
 	<h1>문의하기</h1>
-	
+	<sec:authorize access="isAuthenticated()">
 	<form action="${contextPath}/inquiry/write" method="post">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 		<input type="text" name="title" class="form-control" placeholder="제목">
@@ -30,12 +30,13 @@
 		    <option value="other">기타</option>
 		</select>
 		<textarea rows="10" name="content" class="form-control" placeholder="내용"></textarea>
-		<input type="text" name="writer" class="form-control" placeholder="작성자">
+		<input type="text" name="writer" class="form-control" value="<sec:authentication property="principal.username"/>" readonly="readonly">
 		<div class="btn-center">
 	        <button class="btn btn-info">작성 완료</button>
 	        <a href="${contextPath}/inquiry/list" type="submit" class="btn btn-success">목록</a>
 	    </div>
 	</form>
+	</sec:authorize>
 	
 </div>
 

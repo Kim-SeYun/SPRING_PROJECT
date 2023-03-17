@@ -43,7 +43,9 @@
 		</c:forEach>
 	</table>
 	
-	<a href="${contextPath}/inquiry/write" class="btn btn-info">문의하기</a>
+	<sec:authorize access="isAuthenticated()">
+		<a href="${contextPath}/inquiry/write" class="btn btn-info">문의하기</a>
+	</sec:authorize>
 	
 	
 </div>

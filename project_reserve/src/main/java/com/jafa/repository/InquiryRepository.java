@@ -14,6 +14,8 @@ public interface InquiryRepository {
 	
 	void write(InquiryVO vo);
 	
+	void modify(InquiryVO vo);
+	
 	
 
 }
