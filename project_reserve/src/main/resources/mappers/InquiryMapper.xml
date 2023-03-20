@@ -6,7 +6,7 @@
 <mapper namespace="com.jafa.repository.InquiryRepository">
 
 	<select id="list" resultType="inquiryVO">
-		select * from inquiry_reserve
+		select * from inquiry_reserve order by bno desc
 	</select>
 	
 	<select id="detail" resultType="inquiryVO">
@@ -21,6 +21,14 @@
 	    insert into inquiry_reserve (bno, title, content, writer, type)
 	    values (inquiry_reserve_seq.nextval, #{title}, #{content}, #{writer}, #{type})
 	</insert>
+	
+	<update id="modify">
+		update inquiry_reserve set
+		title = #{title},
+		content = #{content},
+		type = #{type}
+		where bno = #{bno}
+	</update>
 	
 
 </mapper>

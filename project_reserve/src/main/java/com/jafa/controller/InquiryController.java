@@ -49,5 +49,17 @@ public class InquiryController {
 		return "redirect:/inquiry/list";
 	}
 	
+	@GetMapping("/modify")
+	public void modify(Long bno, Model model) {
+		InquiryVO vo = inquiryService.detail(bno);
+		model.addAttribute("i", vo);
+	}
+	
+	@PostMapping("/modify")
+	public String modify(InquiryVO vo) {
+		inquiryService.modify(vo);
+		return "redirect:/inquiry/list";
+	}
+	
 
 }
