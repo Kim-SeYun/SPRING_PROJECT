@@ -41,16 +41,16 @@
 	</div>
 	
 	<sec:authorize access="isAuthenticated()">
-		<form id="replyForm" class="mt-3">
+		<form name="replyForm" id="replyForm" method="post" class="mt-3">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" class="token">
 				<div class="form-group">
 					<ul class="d-flex justify-content-between" style="list-style: none; padding: 0;">
 						<li>댓글작성</li>
-						<li class="form-inline">작성자 : <input type="text" class="form-control" value="<sec:authentication property="principal.username"/>" readonly="readonly"></li>
+						<li class="form-inline">작성자 : <input type="text" name="writer" class="form-control" value="<sec:authentication property="principal.username"/>" readonly="readonly"></li>
 					</ul>
-					<textarea class="form-control" rows="3" name="content"></textarea>
+					<textarea class="form-control" rows="3" name="reply"></textarea>
 				</div>
-				<button type="submit" class="btn btn-primary">작성</button>
+				<button type="submit" class="btn btn-primary writeReply">작성</button>
 			</form>
 		</sec:authorize>
 		
@@ -60,7 +60,15 @@
 		  <div class="card-header">댓글목록</div>
 		  <div class="card-body">
 		  	<ul class="list-group list-group-flush" style="list-style: none;">
-		  		<li>여기 있음</li>
+		  		<c:forEach items="${replyList}" var="reply">
+		         	<li class="list-group-item d-flex justify-content-between">
+		         		<div>
+			         		<p>${reply.reply}</p>
+			         		<span class="badge badge-info">${reply.writer}</span>
+							<span class="badge badge-warning">${reply.replyDate}</span>
+		         		</div>
+		         	</li>
+		        </c:forEach>
 			</ul>
 		  </div>
 		</div>
@@ -86,6 +94,13 @@ $(function(){
 			.attr('action', '${contextPath}/inquiry/modify')
 			.append('<input type="hidden" value="${i.bno}" name="bno">')
 			.appendTo('body')
+			.submit();
+	})
+	
+	$('.writeReply').on('click', function(){
+		let ReForm = $("form[name = replyForm]");
+		ReForm.attr('action', '${contextPath}/inquiry/writeReply')
+			.append('<input type="hidden" value="${i.bno}" name="bno">')
 			.submit();
 	})
 })
