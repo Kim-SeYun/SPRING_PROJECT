@@ -21,5 +21,9 @@ public class ReplyService {
 	public void writeReply(ReplyVO vo) {
 		replyRepository.writeReply(vo);
 	}
+	
+	public void removeReply(Long bno) {
+		replyRepository.removeReply(bno);
+	}
 
 }

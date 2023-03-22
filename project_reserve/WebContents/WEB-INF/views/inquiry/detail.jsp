@@ -45,7 +45,7 @@
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" class="token">
 				<div class="form-group">
 					<ul class="d-flex justify-content-between" style="list-style: none; padding: 0;">
-						<li>댓글작성</li>
+						<li><h6><b>댓글작성</b></h6></li>
 						<li class="form-inline">작성자 : <input type="text" name="writer" class="form-control" value="<sec:authentication property="principal.username"/>" readonly="readonly"></li>
 					</ul>
 					<textarea class="form-control" rows="3" name="reply"></textarea>

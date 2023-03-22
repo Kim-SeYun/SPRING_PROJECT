@@ -14,6 +14,8 @@
 		values(reply_inquiry_seq.nextval, #{bno}, #{reply}, #{writer})
 	</insert>
 	
-	
+	<delete id="removeReply">
+		delete from reply_inquiry where rno = #{rno}
+	</delete>
 
 </mapper>

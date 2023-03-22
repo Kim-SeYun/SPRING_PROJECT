@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jafa.domain.InquiryVO;
 import com.jafa.domain.ReplyVO;
@@ -42,8 +43,15 @@ public class InquiryController {
 	}
 	
 	@PostMapping("/writeReply")
-	public String writeReply(ReplyVO replyVO) {
+	public String writeReply(ReplyVO replyVO, RedirectAttributes rttr) {
 		replyService.writeReply(replyVO);
+		rttr.addAttribute("bno", replyVO.getBno());
+		return "redirect:/inquiry/detail";
+	}
+	
+	@PostMapping("/removeReply")
+	public String removeReply(Long bno) {
+		replyService.removeReply(bno);
 		return "redirect:/inquiry/detail";
 	}
 	
