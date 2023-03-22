@@ -10,6 +10,6 @@ public interface ReplyRepository {
 	
 	void writeReply(ReplyVO vo);
 	
-	void removeReply(Long bno);
+	void removeReply(Long rno);
 
 }

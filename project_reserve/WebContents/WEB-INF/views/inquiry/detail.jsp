@@ -63,10 +63,12 @@
 		  		<c:forEach items="${replyList}" var="reply">
 		         	<li class="list-group-item d-flex justify-content-between">
 		         		<div>
-			         		<p>${reply.reply}</p>
+			         		<p style="white-space: pre-line;">${reply.reply}</p>
 			         		<span class="badge badge-info">${reply.writer}</span>
 							<span class="badge badge-warning">${reply.replyDate}</span>
 		         		</div>
+		         		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" class="token">
+		         		<button class="btn btn-danger deleteReply" style="height: 40px;" data-rno="${reply.rno}">삭제</button>
 		         	</li>
 		        </c:forEach>
 			</ul>
@@ -101,6 +103,14 @@ $(function(){
 		let ReForm = $("form[name = replyForm]");
 		ReForm.attr('action', '${contextPath}/inquiry/writeReply')
 			.append('<input type="hidden" value="${i.bno}" name="bno">')
+			.submit();
+	})
+	
+	$('.deleteReply').on('click', function(){
+		$('<form/>').attr('method', 'post')
+			.attr('action', '${contextPath}/inquiry/removeReply?bno=${i.bno}'+ "&rno="+$(this).attr("data-rno"))
+			.append($('.token'))
+			.appendTo('body')
 			.submit();
 	})
 })

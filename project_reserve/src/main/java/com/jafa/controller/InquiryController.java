@@ -50,8 +50,9 @@ public class InquiryController {
 	}
 	
 	@PostMapping("/removeReply")
-	public String removeReply(Long bno) {
-		replyService.removeReply(bno);
+	public String removeReply(Long rno, RedirectAttributes rttr, ReplyVO replyVO) {
+		replyService.removeReply(rno);
+		rttr.addAttribute("bno", replyVO.getBno());
 		return "redirect:/inquiry/detail";
 	}
 	
