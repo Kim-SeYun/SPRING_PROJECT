@@ -54,4 +54,17 @@
 	    </where>
 	</select>
 	
+	<update id="updateAttachFileCnt">
+    	update hotel_reserve 
+    	set
+    		attachFileCnt = (select count(bno) from hotel_attach where bno=#{bno})
+    	where bno = #{bno} 
+    </update>
+    
+    <insert id="write" useGeneratedKeys="true" keyProperty="bno" keyColumn="bno">
+    	insert into hotel_reserve(bno,category,name,address)
+		values(hotel_reserve_seq.nextval,#{category},#{name},#{address})
+    </insert>
+	
+	
 </mapper>

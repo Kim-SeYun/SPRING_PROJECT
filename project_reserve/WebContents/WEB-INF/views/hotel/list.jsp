@@ -6,13 +6,11 @@
 
 <div class="container">
 	<input type="hidden" value="${category}" class="category">
-		
 	<table class="table">
 	
 		<tr>
 			<td>이름</td>
 			<td>주소</td>
-			<td>가격</td>
 			<td>카테고리</td>
 		</tr>
 		<c:choose>
@@ -26,7 +24,6 @@
 					<tr>
 						<td>${h.name}</td>
 						<td>${h.address}</td>
-						<td>${h.price}</td>
 						<td>${h.category}<td>
 					</tr>
 				</c:forEach>
@@ -34,6 +31,10 @@
 		</c:choose>
 		
 	</table>
+		
+		
+		
+
 	
 	<%-- <ul class="pagination">
 		<c:if test="${p.prev}">

@@ -12,8 +12,8 @@
 		<textarea rows="10" name="content" class="form-control"></textarea>
 		<div class="fileForm">
 			<div>
-				<button type="button" class="btn btn-primary add">폼추가</button>
-				<button type="button" class="btn btn-danger del">폼삭제</button>
+				<button type="button" class="btn btn-primary add">사진추가</button>
+				<button type="button" class="btn btn-danger del">사진삭제</button>
 			</div>
 			<input type="file" name="attachFile" class="form-control attachFile">
 		</div>
