@@ -1,7 +1,5 @@
 package com.jafa.domain;
 
-import org.apache.ibatis.type.Alias;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,6 +18,7 @@ public class HotelVO {
 	private String category; 
 	private String name; 
 	private String address; 
+	private Integer attachFileCnt;
 
 	
 }

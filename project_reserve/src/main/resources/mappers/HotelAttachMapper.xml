@@ -5,11 +5,11 @@
   
 <mapper namespace="com.jafa.repository.HotelAttachRepository">
 	
-	<insert id="save">
+	<insert id="write">
 		insert all
 		<foreach collection="attachList" item="attach">
-			into hotel_attach(attachNo,bno,filePath,fileName,fileType)
-    		values(ho_attach_seq, #{attach.bno}, #{attach.filePath}, #{attach.fileName}, #{attach.fileType})
+			into hotel_attach(attachNo,bno,category,filePath,fileName,fileType)
+    		values(ho_attach_seq, #{attach.bno}, #{attach.category}, #{attach.filePath}, #{attach.fileName}, #{attach.fileType})
 		</foreach>
 		select * from dual
 	</insert>
@@ -19,7 +19,12 @@
 	</select>
 	
 	<select id="listAll" resultType="hotelAttachVO">
-		select * from hotel_attach
+		<if test="category != null and category != ''">
+			SELECT * FROM hotel_attach WHERE category = #{category}
+		</if>
+		<if test="category == null or category == ''">
+			SELECT * FROM hotel_attach
+		</if>
 	</select>
 	
 	

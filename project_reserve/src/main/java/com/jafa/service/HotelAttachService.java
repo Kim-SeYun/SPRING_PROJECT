@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jafa.domain.AttachVO;
+import com.jafa.domain.HotelAttachVO;
 import com.jafa.repository.HotelAttachRepository;
 
 @Service
@@ -14,12 +15,12 @@ public class HotelAttachService {
 	@Autowired
 	HotelAttachRepository hotelAttachRepository;
 	
-	public List<AttachVO> list(Long bno){
+	public List<HotelAttachVO> list(Long bno){
 		return hotelAttachRepository.list(bno);
 	}
 	
-	public List<AttachVO> listAll(){
-		return hotelAttachRepository.listAll();
+	public List<HotelAttachVO> listAll(String category){
+		return hotelAttachRepository.listAll(category);
 	}
 	
 

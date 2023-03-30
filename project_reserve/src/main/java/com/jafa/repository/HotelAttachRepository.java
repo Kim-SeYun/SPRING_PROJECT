@@ -9,9 +9,9 @@ import com.jafa.domain.HotelAttachVO;
 
 public interface HotelAttachRepository {
 	
-	void save(@Param("attachList") List<HotelAttachVO> attachList);
+	void write(@Param("attachList") List<HotelAttachVO> attachList);
 	
-	List<AttachVO> list(Long bno);
+	List<HotelAttachVO> list(Long bno);
 	
-	List<AttachVO> listAll();
+	List<HotelAttachVO> listAll(@Param("category") String category);
 }

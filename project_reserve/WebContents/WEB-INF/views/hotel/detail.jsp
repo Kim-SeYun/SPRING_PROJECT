@@ -6,19 +6,16 @@
 <div class="container">
 	<h1>상세</h1>
 	
-	<!-- 첨부파일이 있을 때  -->
 	<c:if test="${not empty attachList}">
-		<!-- 이미지 미리보기 -->
 		<c:forEach items="${attachList}" var="attach">
 			<c:if test="${attach.fileType eq 'IMAGE'}">
 				<div>
-					<img src="${contextPath}/event/imgDisplay?filePath=${attach.filePath}&fileName=${attach.fileName}" style="width:1000px;">
+					<img src="${contextPath}/hotel/imgDisplay?filePath=${attach.filePath}&fileName=${attach.fileName}" style="width:1000px;">
 				</div>
 			</c:if>
 		</c:forEach>
 	</c:if>	
 	
-	<!-- 첨부파일이 없을 때  -->
 	<c:if test="${empty attachList}">
 		<b>등록된 첨부파일이 없습니다.</b>
 	</c:if>
@@ -35,23 +32,3 @@
 </div>
 
 <%@ include file="../layout/footer.jsp" %>
-
-<script>
-$(function(){
-	$('.delEvent').on('click', function(){
-		$('<form/>').attr('method', 'post')
-			.attr('action', '${contextPath}/event/remove?bno=${b.bno}')
-			.append($('.token'))
-			.appendTo('body')
-			.submit();
-	})
-	
-	$('.modEvent').on('click', function(){
-		$('<form/>').attr('method', 'get')
-			.attr('action', '${contextPath}/event/modify')
-			.append('<input type="hidden" value="${b.bno}" name="bno">')
-			.appendTo('body')
-			.submit();
-	})
-})
-</script>

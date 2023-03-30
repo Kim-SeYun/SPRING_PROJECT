@@ -65,6 +65,10 @@
     	insert into hotel_reserve(bno,category,name,address)
 		values(hotel_reserve_seq.nextval,#{category},#{name},#{address})
     </insert>
+    
+    <select id="detail" resultType="hotelVO">
+    	select * from hotel_reserve where bno = #{bno}
+    </select>
 	
 	
 </mapper>

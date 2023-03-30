@@ -16,6 +16,7 @@ import lombok.ToString;
 public class HotelAttachVO {
 	private Long attachNo;
 	private Long bno; 
+	private String category; 
 	private String filePath; 
 	private String fileName; 
 	private FileType fileType;

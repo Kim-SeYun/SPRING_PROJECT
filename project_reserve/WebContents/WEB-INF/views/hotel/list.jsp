@@ -22,7 +22,7 @@
 			<c:otherwise>
 				<c:forEach items="${list}" var="h">
 					<tr>
-						<td>${h.name}</td>
+						<td><a href="${contextPath}/hotel/detail">${h.name}</a></td>
 						<td>${h.address}</td>
 						<td>${h.category}<td>
 					</tr>
@@ -31,6 +31,30 @@
 		</c:choose>
 		
 	</table>
+	
+	<ul class="hotel-list">
+	    	<c:if test="${not empty attachList}">
+		        <c:set var="printedBno" value="" />
+		        <c:forEach items="${attachList}" var="attach">
+		            <c:if test="${attach.fileType eq 'IMAGE' && attach.bno ne printedBno}">
+		                <c:set var="printedBno" value="${attach.bno}" />
+	                	<li style="margin-bottom: 50px;">
+		                      <c:forEach items="${list}" var="h">
+		                      	<c:if test="${h.bno eq attach.bno}">
+						            <div>${h.name}<br> ${h.address}</div>
+		                      	</c:if>
+					          </c:forEach>
+		                     <a href="${contextPath}/hotel/detail?bno=${attach.bno}">
+		                     <img src="${contextPath}/hotel/imgDisplay?filePath=${attach.filePath}&fileName=${attach.fileName}" style="width: 800px; height: 100px;"></a>
+	               		</li>
+		            </c:if>
+		        </c:forEach>
+		    </c:if>
+		</ul>
+		
+		<c:if test="${empty attachList}">
+			<b>등록된 호텔이 없습니다.</b>
+		</c:if>
 		
 		
 		

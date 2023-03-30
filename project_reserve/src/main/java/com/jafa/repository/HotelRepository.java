@@ -16,6 +16,7 @@ public interface HotelRepository {
 	
 	void updateAttachFileCnt(Long bno);
 		
+	HotelVO detail(Long bno);
 	
 	
 }

@@ -17,12 +17,13 @@ public class HotelFileUpload {
 
 private final static String BOARD_UPLOAD_FOLDER = "c:/reserve/hotel";
 	
-	public List<HotelAttachVO> getAttachVOAndUpload(Long bno, MultipartFile[] multipartFiles){
+	public List<HotelAttachVO> getAttachVOAndUpload(Long bno,String category, MultipartFile[] multipartFiles){
 		List<HotelAttachVO> attachList = new ArrayList<HotelAttachVO>();
 		for(MultipartFile mf : multipartFiles) {
 			if(!mf.isEmpty()) { // MultipartFile객체에 파일정보가 있을 때 
 				HotelAttachVO attachVo = HotelAttachVO.builder()
 						.bno(bno)
+						.category(category)
 						.fileName(mf.getOriginalFilename())
 						.filePath(getFilePath(bno,mf.getOriginalFilename()))
 						.fileType(getFileType(mf.getContentType()))
@@ -30,7 +31,7 @@ private final static String BOARD_UPLOAD_FOLDER = "c:/reserve/hotel";
 				attachList.add(attachVo);
 				
 				// 파일업로드 
-				File folder = new File(BOARD_UPLOAD_FOLDER+"/"+bno);
+				File folder = new File(BOARD_UPLOAD_FOLDER+"/"+category+"/"+bno);
 				File file = new File(attachVo.getFilePath());
 				if(!folder.exists()) {
 					folder.mkdirs();

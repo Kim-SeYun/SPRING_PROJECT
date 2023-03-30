@@ -29,11 +29,16 @@ public class HotelService {
 	@Transactional
 	public void write(HotelVO vo, MultipartFile[] multipartFiles) {
 		hotelRepository.write(vo);
-		List<HotelAttachVO> attachList = hotelFileUpload.getAttachVOAndUpload(vo.getBno(), multipartFiles);
+		List<HotelAttachVO> attachList = hotelFileUpload.getAttachVOAndUpload(vo.getBno(),vo.getCategory(), multipartFiles);
+		System.out.println(attachList);
 		if(!attachList.isEmpty()) {
-			hotelAttachRepository.save(attachList);
+			hotelAttachRepository.write(attachList);
 			hotelRepository.updateAttachFileCnt(vo.getBno());
 		}
+	}
+	
+	public HotelVO detail(Long bno) {
+		return hotelRepository.detail(bno);
 	}
 	
 
