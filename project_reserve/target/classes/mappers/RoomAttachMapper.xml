@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.jafa.repository.RoomAttachRepository">
+	
+	<insert id="write">
+		insert all
+		<foreach collection="roomAttach" item="attach">
+			into room_attach(attachNo,room_id,filePath,fileName,fileType)
+    		values(ro_attach_seq, #{attach.room_id}, #{attach.filePath}, #{attach.fileName}, #{attach.fileType})
+		</foreach>
+		select * from dual
+	</insert>
+
+	<select id="list" resultType="roomAttachVO">
+		select * from room_attach where room_id = #{room_id}
+	</select>
+	
+	
+	
+	
+</mapper>

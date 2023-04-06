@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.jafa.repository.RoomRepository">
+	
+	<select id="list" resultType="roomVO">
+		select * from hotel_room where bno = #{bno}
+	</select>
+	
+	<update id="updateAttachFileCnt">
+    	update hotel_room 
+    	set
+    		attachFileCnt = (select count(room_id) from room_attach where room_id=#{room_id})
+    	where room_id = #{room_id} 
+    </update>
+    
+    <insert id="addRoom" useGeneratedKeys="true" keyProperty="room_id" keyColumn="room_id">
+    	insert into hotel_room(room_id, bno, room_type, room_info, room_number, capacity, price, available)
+		values(hotel_room_seq.nextval, #{bno}, #{room_type}, #{room_info}, #{room_number}, #{capacity}, #{price}, #{available})
+    </insert>
+	
+</mapper>

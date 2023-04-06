@@ -9,29 +9,29 @@ import java.util.UUID;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.jafa.domain.AttachVO;
 import com.jafa.domain.FileType;
-import com.jafa.domain.HotelAttachVO;
+import com.jafa.domain.RoomAttachVO;
 
 @Component
-public class HotelFileUpload {
+public class RoomFileUploadUtils {
 
-private final static String BOARD_UPLOAD_FOLDER = "c:/reserve/hotel";
+private final static String BOARD_UPLOAD_FOLDER = "c:/reserve/room";
 	
-	public List<HotelAttachVO> getAttachVOAndUpload(Long bno,String category, MultipartFile[] multipartFiles){
-		List<HotelAttachVO> attachList = new ArrayList<HotelAttachVO>();
+	public List<RoomAttachVO> getAttachVOAndUpload(Long room_id, MultipartFile[] multipartFiles){
+		List<RoomAttachVO> roomAttach = new ArrayList<RoomAttachVO>();
 		for(MultipartFile mf : multipartFiles) {
 			if(!mf.isEmpty()) { // MultipartFile객체에 파일정보가 있을 때 
-				HotelAttachVO attachVo = HotelAttachVO.builder()
-						.bno(bno)
-						.category(category)
+				RoomAttachVO attachVo = RoomAttachVO.builder()
+						.room_id(room_id)
 						.fileName(mf.getOriginalFilename())
-						.filePath(getFilePath(bno,mf.getOriginalFilename(), category))
+						.filePath(getFilePath(room_id,mf.getOriginalFilename()))
 						.fileType(getFileType(mf.getContentType()))
 						.build();
-				attachList.add(attachVo);
+				roomAttach.add(attachVo);
 				
 				// 파일업로드 
-				File folder = new File(BOARD_UPLOAD_FOLDER+"/"+category+"/"+bno);
+				File folder = new File(BOARD_UPLOAD_FOLDER+"/"+room_id);
 				File file = new File(attachVo.getFilePath());
 				if(!folder.exists()) {
 					folder.mkdirs();
@@ -45,13 +45,13 @@ private final static String BOARD_UPLOAD_FOLDER = "c:/reserve/hotel";
 				}
 			}
 		}
-		return attachList; 
+		return roomAttach; 
 	}
 	
 	// 업로드한 파일 경로 
-	private String getFilePath(Long bno, String originalFilename, String category) {
+	private String getFilePath(Long bno, String originalFilename) {
 		String uuid = UUID.randomUUID().toString();
-		return BOARD_UPLOAD_FOLDER+"/"+category+"/"+bno+"/"+uuid+"_"+originalFilename;
+		return BOARD_UPLOAD_FOLDER+"/"+bno+"/"+uuid+"_"+originalFilename;
 	}
 
 	// 파일 타입 결정

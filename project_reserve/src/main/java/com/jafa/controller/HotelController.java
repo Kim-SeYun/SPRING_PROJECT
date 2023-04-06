@@ -23,9 +23,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jafa.domain.HotelAttachVO;
 import com.jafa.domain.HotelVO;
-import com.jafa.service.AttachService;
+import com.jafa.domain.RoomAttachVO;
+import com.jafa.domain.RoomVO;
 import com.jafa.service.HotelAttachService;
 import com.jafa.service.HotelService;
+import com.jafa.service.RoomAttachService;
+import com.jafa.service.RoomService;
 
 @Controller
 @RequestMapping("/hotel")
@@ -36,6 +39,12 @@ public class HotelController {
 	
 	@Autowired
 	HotelAttachService hotelAttachService;
+	
+	@Autowired
+	RoomService roomService;
+	
+	@Autowired
+	RoomAttachService roomAttachService;
 	
 	@GetMapping("/write")
 	public String write() {
@@ -64,12 +73,19 @@ public class HotelController {
 	}
 	
 	@GetMapping("/detail")
-	public void detail(Long bno, Model model) {
-		HotelVO vo = hotelService.detail(bno);
+	public void detail(@RequestParam("bno") Long bno, @RequestParam("room_id") Long room_id, Model model) {
+		System.out.println(room_id);
+		HotelVO vo = hotelService.detail(bno); // 하나의 호텔
 		model.addAttribute("h", vo);
 		if(vo.getAttachFileCnt()>0) {
 			List<HotelAttachVO> attachList = hotelAttachService.list(bno);
 			model.addAttribute("attachList", attachList);
+		}
+		RoomVO roomVO = roomService.list(bno);
+		model.addAttribute("r", roomVO);
+		if(roomVO.getAttachFileCnt()>0) {
+			List<RoomAttachVO> roomAttach = roomAttachService.list(room_id);
+			model.addAttribute("roomAttach", roomAttach);
 		}
 	}
 	

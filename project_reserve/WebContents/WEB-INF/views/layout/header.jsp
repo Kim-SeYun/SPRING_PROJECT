@@ -62,7 +62,7 @@
 		                <a class="dropdown-item" href="${contextPath}/member/admin">관리자페이지</a>
 		            </sec:authorize>
 		            <sec:authorize access="hasAnyRole('ROLE_REGULAR_MEMBER','ROLE_ASSOCIATE_MEMBER')">
-		                <a class="dropdown-item" href="${contextPath}/member/mypage">나의정보보기</a>
+		                <a class="dropdown-item" href="${contextPath}/member/mypage">마이페이지</a>
 		            </sec:authorize>
 		            <div class="dropdown-divider"></div>
 		            <form action="${contextPath}/member/logout" method="post">

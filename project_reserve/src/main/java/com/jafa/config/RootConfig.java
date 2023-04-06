@@ -24,6 +24,8 @@ import com.jafa.domain.HotelVO;
 import com.jafa.domain.InquiryVO;
 import com.jafa.domain.MemberVO;
 import com.jafa.domain.ReplyVO;
+import com.jafa.domain.RoomAttachVO;
+import com.jafa.domain.RoomVO;
 
 @Configuration
 @MapperScan("com.jafa.repository")
@@ -55,7 +57,7 @@ public class RootConfig {
 		SqlSessionFactoryBean factory = new SqlSessionFactoryBean();
 		factory.setDataSource(dataSource());
 		factory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mappers/**/*Mapper.xml"));
-		factory.setTypeAliases(MemberVO.class, BoardVO.class, EventVO.class, AttachVO.class, HotelVO.class, InquiryVO.class, ReplyVO.class, HotelAttachVO.class);
+		factory.setTypeAliases(MemberVO.class, BoardVO.class, EventVO.class, AttachVO.class, HotelVO.class, InquiryVO.class, ReplyVO.class, HotelAttachVO.class, RoomVO.class, RoomAttachVO.class);
 		return factory;
 	}
 	
