@@ -14,8 +14,8 @@ public class RoomAttachService {
 	@Autowired
 	RoomAttachRepository roomAttachRepository;
 	
-	public List<RoomAttachVO> list(Long room_id){
-		return roomAttachRepository.list(room_id);
+	public List<RoomAttachVO> list(Long bno){
+		return roomAttachRepository.list(bno);
 	}
 	
 	

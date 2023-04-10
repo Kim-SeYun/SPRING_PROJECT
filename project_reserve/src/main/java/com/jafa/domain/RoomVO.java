@@ -21,6 +21,7 @@ public class RoomVO {
 	private String room_info;
 	private Long room_number;
 	private Long price;
+	private Long capacity;
 	private Integer attachFileCnt;
 	private int available;
 

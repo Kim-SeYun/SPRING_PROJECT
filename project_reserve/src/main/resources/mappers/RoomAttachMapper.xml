@@ -15,7 +15,11 @@
 	</insert>
 
 	<select id="list" resultType="roomAttachVO">
-		select * from room_attach where room_id = #{room_id}
+		SELECT a.attachNo, h.bno, r.room_id, a.filePath, a.fileName, a.fileType
+		FROM hotel_reserve h
+		JOIN hotel_room r ON h.bno = r.bno
+		JOIN room_attach a ON r.room_id = a.room_id
+		WHERE h.bno = #{bno}
 	</select>
 	
 	

@@ -4,7 +4,6 @@
 <script src="${contextPath}/resources/js/list.js"></script>
 
 <div class="container">
-	<h1>상세</h1>
 	
 	<!-- 첨부파일이 있을 때  -->
 	<c:if test="${not empty attachList}">

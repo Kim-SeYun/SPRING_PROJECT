@@ -24,14 +24,13 @@ public class RoomService {
 	@Autowired
 	RoomFileUploadUtils roomFileUploadUtils;
 	
-	public RoomVO list(Long bno){
-		return roomRepository.list(bno);
+	public List<RoomVO> roomList(Long bno){
+		return roomRepository.roomList(bno);
 	}
 	
 	public void addRoom(RoomVO vo, MultipartFile[] multipartFiles) {
 		roomRepository.addRoom(vo);
 		List<RoomAttachVO> roomAttach = roomFileUploadUtils.getAttachVOAndUpload(vo.getRoom_id(), multipartFiles);
-		System.out.println(roomAttach);
 		if(!roomAttach.isEmpty()) {
 			roomAttachRepository.write(roomAttach);
 			roomRepository.updateAttachFileCnt(vo.getRoom_id());

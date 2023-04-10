@@ -10,6 +10,6 @@ public interface RoomAttachRepository {
 	
 	void write(@Param("roomAttach") List<RoomAttachVO> roomAttach);
 	
-	List<RoomAttachVO> list(Long room_id);
+	List<RoomAttachVO> list(Long bno);
 	
 }

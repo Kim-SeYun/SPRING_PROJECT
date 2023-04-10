@@ -5,17 +5,19 @@
 
 
 <div class="container">
-	<form action="${contextPath}/hotel/write?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
-		<input type="text" name="name" placeholder="호텔이름" class="form-control">
-		<select class="form-control" id="category" name="category">
-		    <option value="">호텔유형을 선택하세요</option>
-		    <option value="motel">모텔</option>
-		    <option value="hotel">호텔·리조트</option>
-		    <option value="pension">펜션</option>
-		    <option value="guesthouse">게스트하우스</option>
-		    <option value="camping">캠핑·글램핑</option>
+	<form action="${contextPath}/hotel/addRoom?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
+		${r.room_id}
+		<input type="hidden" value="${r.bno}" name="bno">
+		<select class="form-control" id="room_type" name="room_type">
+		    <option value="">방유형을 선택하세요</option>
+		    <option value="single">싱글</option>
+		    <option value="double">더블</option>
+		    <option value="twin">트윈</option>
 		</select>
-		<input type="text" name="address" placeholder="주소" class="form-control">
+		<textarea rows="10" name="room_info" class="form-control"></textarea>
+		<input type="number" name="room_number" placeholder="방번호" class="form-control">
+		<input type="number" name="capacity" placeholder="인원수" class="form-control">
+		<input type="number" name="price" placeholder="가격" class="form-control">
 		<div class="fileForm">
 			<div>
 				<button type="button" class="btn btn-primary add">사진추가</button>
@@ -25,7 +27,7 @@
 		</div>
 		<button class="btn btn-info">등록</button>
 	</form>
-	
+
 </div>
 
 <%@ include file="../layout/footer.jsp" %>
@@ -35,8 +37,8 @@ $(function(){
 	
 	let formCount = 1; 
 	$('.fileForm .add').click(function(){
-		if(formCount>=7){
-			alert('최대 7개까지 추가할 수 있습니다.')
+		if(formCount>=4){
+			alert('최대 4개까지 추가할 수 있습니다.')
 			return;
 		}
 		let fileFormTag = $('.fileForm .attachFile').eq(0).clone().val('');

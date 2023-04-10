@@ -43,7 +43,7 @@
 		
 		
 		<c:if test="${empty attachList}">
-			<b>등록된 호텔이 없습니다.</b>
+			<b>등록된 숙박업소가 없습니다.</b>
 		</c:if>
 		
 		

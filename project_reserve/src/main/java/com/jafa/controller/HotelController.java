@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.FileNameMap;
 import java.net.URLConnection;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,20 +74,32 @@ public class HotelController {
 	}
 	
 	@GetMapping("/detail")
-	public void detail(@RequestParam("bno") Long bno, @RequestParam("room_id") Long room_id, Model model) {
-		System.out.println(room_id);
+	public void detail(@RequestParam("bno") Long bno, Model model) {
 		HotelVO vo = hotelService.detail(bno); // 하나의 호텔
 		model.addAttribute("h", vo);
 		if(vo.getAttachFileCnt()>0) {
 			List<HotelAttachVO> attachList = hotelAttachService.list(bno);
 			model.addAttribute("attachList", attachList);
 		}
-		RoomVO roomVO = roomService.list(bno);
-		model.addAttribute("r", roomVO);
-		if(roomVO.getAttachFileCnt()>0) {
-			List<RoomAttachVO> roomAttach = roomAttachService.list(room_id);
-			model.addAttribute("roomAttach", roomAttach);
+		List<RoomVO> roomList = roomService.roomList(bno);
+		    model.addAttribute("roomList", roomList);
+		    if (roomList.size() > 0 && roomList.get(0).getAttachFileCnt() > 0) {
+		        List<RoomAttachVO> roomAttach = roomAttachService.list(bno);
+		        model.addAttribute("roomAttach", roomAttach);
 		}
+	}
+	
+	@GetMapping("/addRoom")
+	public String addRoom() {
+		return "hotel/addRoom";
+	}
+	
+	@PostMapping("/addRoom")
+	public String addRoom(RoomVO vo, Model model,
+			@RequestParam Long bno,
+			@RequestParam("attachFile") MultipartFile[] multipartFiles){
+		roomService.addRoom(vo, multipartFiles);
+		return "redirect:/hotel/detail?bno="+bno;
 	}
 	
 
