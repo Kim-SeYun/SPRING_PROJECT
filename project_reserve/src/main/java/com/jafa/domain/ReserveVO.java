@@ -1,5 +1,9 @@
 package com.jafa.domain;
 
+
+
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,19 +17,16 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Builder
-public class RoomVO {
+public class ReserveVO {
 	
+	private Long book_id;
 	private Long room_id;
-	private Long bno;
-	private String name;
 	private String room_type;
 	private String check_in;
 	private String check_out;
-	private String room_info;
-	private Long room_number;
 	private Long price;
 	private Long capacity;
-	private Integer attachFileCnt;
+	private Date bookDate;
 	private int available;
 
 }

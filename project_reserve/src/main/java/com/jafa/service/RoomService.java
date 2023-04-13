@@ -29,6 +29,7 @@ public class RoomService {
 	}
 	
 	public void addRoom(RoomVO vo, MultipartFile[] multipartFiles) {
+		System.out.println(vo);
 		roomRepository.addRoom(vo);
 		List<RoomAttachVO> roomAttach = roomFileUploadUtils.getAttachVOAndUpload(vo.getRoom_id(), multipartFiles);
 		if(!roomAttach.isEmpty()) {

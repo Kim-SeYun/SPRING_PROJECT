@@ -6,8 +6,8 @@
 
 <div class="container">
 	<form action="${contextPath}/hotel/addRoom?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
-		${r.room_id}
-		<input type="hidden" value="${r.bno}" name="bno">
+
+		<input type="hidden" value="${param.bno}" name="bno">
 		<select class="form-control" id="room_type" name="room_type">
 		    <option value="">방유형을 선택하세요</option>
 		    <option value="single">싱글</option>

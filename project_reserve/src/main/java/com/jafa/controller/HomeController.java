@@ -1,6 +1,7 @@
 package com.jafa.controller;
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,12 @@ public class HomeController {
 		model.addAttribute("p", new Pagination(criteria, hotelRepository.getTotalCount(criteria)));
 		List<HotelAttachVO> attachList = hotelAttachService.listAll(category);
 		model.addAttribute("attachList", attachList);
+		
+		LocalDate today = LocalDate.now();
+		LocalDate tomorrow = today.plusDays(1);
+
+		model.addAttribute("today", today);
+		model.addAttribute("tomorrow", tomorrow);
 		return "hotel/list";
 		
 	}

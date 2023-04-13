@@ -98,9 +98,11 @@ public class HotelController {
 	public String addRoom(RoomVO vo, Model model,
 			@RequestParam Long bno,
 			@RequestParam("attachFile") MultipartFile[] multipartFiles){
+
 		roomService.addRoom(vo, multipartFiles);
 		return "redirect:/hotel/detail?bno="+bno;
 	}
+	
 	
 
 }

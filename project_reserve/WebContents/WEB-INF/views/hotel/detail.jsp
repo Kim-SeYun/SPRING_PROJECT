@@ -3,6 +3,10 @@
 <%@ include file="../layout/header.jsp" %>
 <script src="${contextPath}/resources/js/list.js"></script>
 
+<!-- swiper라이브러리 -->
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
 <style>
 	.hotel-info {
 	    margin-left: 60px;
@@ -69,6 +73,14 @@
 	    width: 100%;
 	}
 	
+	 .swiper-container {
+        width: 500px;
+        margin-right: 60px;
+    }
+    .swiper-slide img {
+        width: 100%;
+    }
+
 
 </style>
 
@@ -79,36 +91,41 @@
 
 	
 	
-	<div style="display:flex;">
+<div style="display:flex;">
     <c:if test="${not empty attachList}">
         <div>
             <img id="mainImage" src="${contextPath}/hotel/imgDisplay?filePath=${attachList[0].filePath}&fileName=${attachList[0].fileName}" style="width:500px;">
-            <div>
-                <c:forEach items="${attachList}" var="attach" varStatus="status">
-                    <c:if test="${attach.fileType eq 'IMAGE'}">
-                        <img src="${contextPath}/hotel/imgDisplay?filePath=${attach.filePath}&fileName=${attach.fileName}" style="width:100px; margin:10px;" onclick="changeImage('${contextPath}/hotel/imgDisplay?filePath=${attachList[status.index].filePath}&fileName=${attachList[status.index].fileName}')">
-                    </c:if>
-                </c:forEach>
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <c:forEach items="${attachList}" var="attach" varStatus="status">
+                        <c:if test="${attach.fileType eq 'IMAGE'}">
+                            <div class="swiper-slide">
+                                <img src="${contextPath}/hotel/imgDisplay?filePath=${attach.filePath}&fileName=${attach.fileName}" style="width:100px; margin:10px;" onclick="changeImage('${contextPath}/hotel/imgDisplay?filePath=${attachList[status.index].filePath}&fileName=${attachList[status.index].fileName}')">
+                            </div>
+                        </c:if>
+                    </c:forEach>
+                </div>
+                <div class="swiper-button-prev"></div>
+    			<div class="swiper-button-next"></div>
             </div>
         </div>
     </c:if>
 
-
-	<c:if test="${empty attachList}">
-		<b>등록된 첨부파일이 없습니다.</b>
-	</c:if>
-
+    <c:if test="${empty attachList}">
+        <b>등록된 첨부파일이 없습니다.</b>
+    </c:if>
 
     <div class="hotel-info">
         <div><h2>${h.name}</h2></div>
         <p>${h.address}</p>
     </div>
-
 </div>
+
 
 <!-- 객실리스트 -->
 <c:if test="${not empty roomList}">
     <c:forEach items="${roomList}" var="r">
+    <input type="hidden" name="room_id" value="${r.room_id}">
 		<div class="room_box">
 	        <div class="room_list">
 	            <c:if test="${not empty roomAttach}">
@@ -129,14 +146,13 @@
                         <p>2인 기준 최대인원 : ${r.capacity}</p>
                         <p>가격 : ${r.price}</p>
                         <p>${r.room_info}</p>
-	                <button>예약</button>
+	                <button class="toReserve">예약</button>
 	            </div>
 	        </div>
 		</div>
     </c:forEach>
 </c:if>
 
-	
 	
 
 	
@@ -150,4 +166,37 @@
         var mainImage = document.getElementById("mainImage");
         mainImage.src = imageUrl;
     }
+    
+  	  var swiper = new Swiper('.swiper-container', {
+  	    slidesPerView: 4,
+  	    spaceBetween: 10,
+  	    navigation: {
+  	      nextEl: '.swiper-button-next',
+  	      prevEl: '.swiper-button-prev',
+  	    },
+  	  });
+  	  
+  	  
+  	$('.toReserve').on('click', function() {
+
+      var urlParams = new URLSearchParams(window.location.search);
+      var checkinDate = urlParams.get('checkin_date');
+      var checkoutDate = urlParams.get('checkout_date');
+      var room_id = $('input[name="room_id"]').val();
+
+      $('<form/>').attr('method', 'get')
+      .attr('action', '${contextPath}/reserve/list')
+      .append($('<input/>').attr('type', 'hidden').attr('name', 'checkinDate').attr('value', checkinDate))
+      .append($('<input/>').attr('type', 'hidden').attr('name', 'checkoutDate').attr('value', checkoutDate))
+      .append($('<input/>').attr('type', 'hidden').attr('name', 'room_id').attr('value', room_id))
+      .appendTo('body')
+      .submit();
+      
+  	
+  	});
+  	  
+  	  
+  
+
+    	  
 </script>
