@@ -13,6 +13,11 @@
 		where r.room_id=#{room_id}
 	</select>
 	
+	<insert id="reserve">
+		INSERT INTO hotel_booking(book_id, room_id, guest_name, phone, name, room_type, price, checkin, checkout)
+		VALUES (hotel_booking_seq.nextval, #{room_id}, #{guest_name}, #{phone}, #{name}, #{room_type}, #{price}, #{checkin}, #{checkout})
+	</insert>
+	
 	
 	
 	

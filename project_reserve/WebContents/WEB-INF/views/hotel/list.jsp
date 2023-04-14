@@ -65,28 +65,28 @@ button[type="submit"]:hover {
 	  <form action="${contextPath}/list/${category}" method="get">
 	    <div class="form-group">
 	      <label for="check-in">체크인</label>
-	      <input type="date" name="checkin_date" value="${today}" onchange="updateCheckoutDate()">
+	      <input type="date" name="checkin_date" value="${param.checkin_date == null ? today : param.checkin_date}" onchange="updateCheckoutDate()">
 	    </div>
 	    <div class="form-group">
 	      <label for="check-out">체크아웃</label>
-	      <input type="date" name="checkout_date" value="${tomorrow}">
+	      <input type="date" name="checkout_date" value="${param.checkout_date == null ? tomorrow : param.checkout_date}">
 	    </div>
 	    <div class="form-group">
 	      <label for="capacity">인원</label>
 	      <select id="capacity" name="capacity">
-	        <option value="2">2명</option>
-	        <option value="3">3명</option>
-	        <option value="4">4명</option>
-	        <option value="5">5명</option>
-	        <option value="6">6명</option>
+	      <option value="2" ${param.capacity == '2' ? 'selected' : ''}>2명</option>
+          <option value="3" ${param.capacity == '3' ? 'selected' : ''}>3명</option>
+          <option value="4" ${param.capacity == '4' ? 'selected' : ''}>4명</option>
+          <option value="5" ${param.capacity == '5' ? 'selected' : ''}>5명</option>
+          <option value="6" ${param.capacity == '6' ? 'selected' : ''}>6명</option>
 	      </select>
 	    </div>
-	    <div class="form-group">
-	    <label for="bed_type">배드타입</label>
-	    	<input type="checkbox" name="bed_type" value="single">싱글
-	    	<input type="checkbox" name="bed_type" value="double">더블
-	    	<input type="checkbox" name="bed_type" value="twin">트윈
-	    </div>
+		<div class="form-group">
+	        <label for="bed_type">배드타입</label>
+	        <input type="checkbox" name="bed_type" value="single" ${param.bed_type == 'single' ? 'checked' : ''}>싱글
+	        <input type="checkbox" name="bed_type" value="double" ${param.bed_type == 'double' ? 'checked' : ''}>더블
+	        <input type="checkbox" name="bed_type" value="twin" ${param.bed_type == 'twin' ? 'checked' : ''}>트윈
+        </div>
 	    <div class="form-group">
 	      <button type="submit">검색</button>
 	    </div>
@@ -135,27 +135,6 @@ button[type="submit"]:hover {
 		</c:if>
 		
 		
-		
-
-	
-	<%-- <ul class="pagination">
-		<c:if test="${p.prev}">
-			<li class="page-item">
-				<a class="page-link" href="?page=${p.startPage-1}">Previous</a>
-			</li>
-		</c:if>
-		<c:forEach begin="${p.startPage}" end="${p.endPage}" var="pageNum">
-			<li class="page-item ${cri.page == pageNum ? 'active' :''}">
-				<a class="page-link" href="?page=${pageNum}">${pageNum}</a>
-			</li>
-		</c:forEach>
-		<c:if test="${p.next}">
-		<li class="page-item">
-			<a class="page-link" href="?page=${p.endPage+1}">Next</a>
-		</li>
-		</c:if>
-	</ul> --%>
-	
 	
 </div>
 
