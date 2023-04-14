@@ -18,29 +18,12 @@
 				</when>
 			</choose>
 		</trim>
-		<if test="category != null and category != ''">
-	    	and category = #{category}
-    	</if>
+		 <if test="category != null and category != ''">
+		   and category = #{category}
+		 </if>
 	</sql>
 
 	<select id="list" resultType="hotelVO">
-		<!-- <![CDATA[
-		select 
-		    rn, bno, category, name, address, price
-		from
-		(
-		    select 
-		        /*+ index_desc(hotel_reserve pk_hotel_reserve) */
-		        rownum as rn, bno, category, name, address, price
-		    from 
-		        hotel_reserve
-		    where rownum <= #{maxRow}
-		]]>
-			<include refid="condition"/>
-		<![CDATA[
-		) 
-		where rn > #{minRow}
-		]]> -->
 		select * from hotel_reserve 
 		<where>
 	    	<include refid="condition"/>

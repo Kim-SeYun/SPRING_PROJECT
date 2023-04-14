@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jafa.domain.ReserveVO;
 import com.jafa.domain.RoomVO;
@@ -36,9 +37,18 @@ public class ReserveController {
 	}
 	
 	@PostMapping("/reserve")
-	public String reserve(ReserveVO vo) {
-		reserveService.reserve(vo);
-		return "redirect:/";
+	public String reserve(ReserveVO vo, String category, RedirectAttributes rttr) {
+		boolean reserve = reserveService.reserve(vo);
+		System.out.println("컨트롤러 예약성공여부: " + reserve);
+		if(reserve) {
+			// 예약성공
+			return "redirect:/";
+		} else {
+			System.out.println(category);
+			rttr.addFlashAttribute("reservFail", "예약실패");
+			//예약실패 
+			return "redirect:/list/"+category;
+		}
 	}
 	
 

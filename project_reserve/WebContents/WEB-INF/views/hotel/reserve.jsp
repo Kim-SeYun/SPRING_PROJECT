@@ -69,7 +69,7 @@
       </div>
     </div>
   </div>
-
+	<input type="hidden" name="category" value="${param.category}">
   <button>예약하기</button>
 </form>
 

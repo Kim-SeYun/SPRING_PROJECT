@@ -8,6 +8,7 @@
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 <style>
+	
 	.hotel-info {
 	    margin-left: 60px;
 	  }
@@ -85,6 +86,7 @@
 </style>
 
 
+<input type="hidden" name="category" value="${h.category}">
 
 <div class="container">
 <button type="button" onclick="location.href='${contextPath}/hotel/addRoom?bno=${h.bno}'">객실등록</button>
@@ -125,7 +127,7 @@
 <!-- 객실리스트 -->
 <c:if test="${not empty roomList}">
     <c:forEach items="${roomList}" var="r">
-    <input type="hidden" name="room_id" value="${r.room_id}">
+    
 		<div class="room_box">
 	        <div class="room_list">
 	            <c:if test="${not empty roomAttach}">
@@ -143,10 +145,11 @@
 	            </c:if>
 	            <div class="room_info" >
                         <h1>${r.room_type}</h1>
+                        <h1>${r.room_name}</h1>
                         <p>2인 기준 최대인원 : ${r.capacity}</p>
                         <p>가격 : ${r.price}</p>
                         <p>${r.room_info}</p>
-	                <button class="toReserve">예약</button>
+	                <button class="toReserve" data-roomid="${r.room_id}">예약</button>
 	            </div>
 	        </div>
 		</div>
@@ -162,6 +165,7 @@
 
 
 <script>
+
     function changeImage(imageUrl) {
         var mainImage = document.getElementById("mainImage");
         mainImage.src = imageUrl;
@@ -182,13 +186,14 @@
       var urlParams = new URLSearchParams(window.location.search);
       var checkinDate = urlParams.get('checkin_date');
       var checkoutDate = urlParams.get('checkout_date');
-      var room_id = $('input[name="room_id"]').val();
+      var room_id = $(this).data('roomid');
 
       $('<form/>').attr('method', 'get')
       .attr('action', '${contextPath}/reserve/list')
       .append($('<input/>').attr('type', 'hidden').attr('name', 'checkinDate').attr('value', checkinDate))
       .append($('<input/>').attr('type', 'hidden').attr('name', 'checkoutDate').attr('value', checkoutDate))
       .append($('<input/>').attr('type', 'hidden').attr('name', 'room_id').attr('value', room_id))
+      .append($('[name="category"]'))
       .appendTo('body')
       .submit();
       

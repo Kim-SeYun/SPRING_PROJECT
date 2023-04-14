@@ -17,8 +17,8 @@
     </update>
     
     <insert id="addRoom" useGeneratedKeys="true" keyProperty="room_id" keyColumn="room_id">
-    	insert into hotel_room(room_id, bno, room_type, room_info, room_number, capacity, price, available)
-		values(hotel_room_seq.nextval, #{bno}, #{room_type}, #{room_info}, #{room_number}, #{capacity}, #{price}, #{available})
+    	insert into hotel_room(room_id, bno, room_type, room_info, room_name, capacity, price)
+		values(hotel_room_seq.nextval, #{bno}, #{room_type}, #{room_info}, #{room_name}, #{capacity}, #{price})
     </insert>
 	
 </mapper>

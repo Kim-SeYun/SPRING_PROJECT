@@ -17,8 +17,20 @@ public class ReserveService {
 		return reserveRepository.list(room_id);
 	}
 	
-	public void reserve(ReserveVO vo) {
-		reserveRepository.reserve(vo);
+	public boolean reserve(ReserveVO vo) {
+		
+		// 예약여부 확인
+		String test = reserveRepository.isAvailable(vo.getCheckin(),vo.getRoom_id());
+		System.out.println("예약여부 확인 : "+test);
+		;
+		// 예약
+		if(Boolean.parseBoolean(test)) {
+			reserveRepository.reserve(vo);
+			return true; 
+		} else {
+			// 예약실패
+			return false;
+		}
 	}
 	
 	

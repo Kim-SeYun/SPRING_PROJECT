@@ -19,10 +19,10 @@ public class RoomVO {
 	private Long bno;
 	private String name;
 	private String room_type;
+	private String room_name;
 	private String check_in;
 	private String check_out;
 	private String room_info;
-	private Long room_number;
 	private Long price;
 	private Long capacity;
 	private Integer attachFileCnt;

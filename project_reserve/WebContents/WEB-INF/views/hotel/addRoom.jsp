@@ -14,8 +14,8 @@
 		    <option value="double">더블</option>
 		    <option value="twin">트윈</option>
 		</select>
+		<input type="text" name="room_name" placeholder="방이름" class="form-control">
 		<textarea rows="10" name="room_info" class="form-control"></textarea>
-		<input type="number" name="room_number" placeholder="방번호" class="form-control">
 		<input type="number" name="capacity" placeholder="인원수" class="form-control">
 		<input type="number" name="price" placeholder="가격" class="form-control">
 		<div class="fileForm">

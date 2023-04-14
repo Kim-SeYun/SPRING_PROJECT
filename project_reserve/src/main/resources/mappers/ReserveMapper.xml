@@ -18,6 +18,21 @@
 		VALUES (hotel_booking_seq.nextval, #{room_id}, #{guest_name}, #{phone}, #{name}, #{room_type}, #{price}, #{checkin}, #{checkout})
 	</insert>
 	
+	<select id="isAvailable" resultType="string">
+		SELECT 
+		  CASE 
+		    WHEN EXISTS (
+		      SELECT 1 
+		      FROM hotel_booking 
+		      WHERE #{checkin} BETWEEN checkin AND checkout AND room_id=#{room_id}
+		    ) 
+		    THEN 'false' 
+		    ELSE 'true' 
+		  END AS is_available
+		FROM dual
+	</select>
+	
+	
 	
 	
 	
