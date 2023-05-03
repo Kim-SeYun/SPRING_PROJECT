@@ -2,26 +2,30 @@ package com.jafa.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jafa.domain.AuthListDTO;
 import com.jafa.domain.AuthVO;
 import com.jafa.domain.Criteria;
 import com.jafa.domain.HotelAttachVO;
+import com.jafa.domain.MemberDTO;
 import com.jafa.domain.MemberDetail;
 import com.jafa.domain.MemberType;
 import com.jafa.domain.MemberVO;
-import com.jafa.domain.Pagination;
 import com.jafa.repository.HotelRepository;
 import com.jafa.service.HotelAttachService;
 import com.jafa.service.MemberService;
@@ -49,7 +53,30 @@ public class MemberController {
 	
 	@PreAuthorize("isAuthenticated()") // 인증된 사용자 
 	@GetMapping("/mypage")
-	public String myPage(Authentication  auth, Model model, @ModelAttribute("cri") Criteria criteria, @PathVariable(required = false) String category) {
+	public String myPage(Authentication auth, Model model) {
+		MemberDetail principal = (MemberDetail) auth.getPrincipal();
+		MemberVO memberVO = principal.getMemberVO();
+		model.addAttribute("memberInfo", memberVO);		
+		return "member/mypage";
+	}
+	
+	@PostMapping("/modMember")
+	public String modMember(Authentication auth, @RequestParam String memberId, @RequestParam String email, @RequestParam String address, @RequestParam String phoneNumber, RedirectAttributes rttr) {
+	    // 회원 정보 업데이트
+	    MemberDetail principal = (MemberDetail) auth.getPrincipal();
+	    MemberVO memberVO = principal.getMemberVO();
+	    memberVO.setMemberId(memberId);
+	    memberVO.setEmail(email);
+	    memberVO.setAddress(address);
+	    memberVO.setPhoneNumber(phoneNumber);
+	    memberService.updateMemberInfo(memberVO);
+
+	    return "redirect:/member/mypage";
+	}
+	
+	@PreAuthorize("hasAnyRole('ROLE_REGULAR_MEMBER','ROLE_ASSOCIATE_MEMBER')")
+	@GetMapping("/hotelAdmin")
+	public String hotelAdmin(Authentication  auth, Model model, @ModelAttribute("cri") Criteria criteria, @PathVariable(required = false) String category) {
 		log.info("로그인한 사용자만 접근 가능");
 		MemberDetail principal = (MemberDetail) auth.getPrincipal();
 		MemberVO memberVO = principal.getMemberVO();
@@ -57,7 +84,7 @@ public class MemberController {
 		model.addAttribute("list", hotelRepository.list(criteria));
 		List<HotelAttachVO> attachList = hotelAttachService.listAll(category);
 		model.addAttribute("attachList", attachList);
-		return "member/mypage";
+		return "member/hotelAdmin";
 	}
 	
 	@PreAuthorize("hasAnyRole('ROLE_REGULAR_MEMBER','ROLE_ASSOCIATE_MEMBER')")
@@ -68,6 +95,7 @@ public class MemberController {
 		model.addAttribute("list", memberList);
 		model.addAttribute("mType", MemberType.values());
 	}
+	
 	
 	@GetMapping("/accessError")
 	public void accessError() {
@@ -99,15 +127,19 @@ public class MemberController {
 	// 회원가입폼
 	@GetMapping("/join")
 	public void joinForm() {
-		
 	}
 		
 	// 회원가입처리
 	@PostMapping("/join")
-	public String join(MemberVO vo, RedirectAttributes rttr) {
+	public String join(MemberVO vo, RedirectAttributes rttr, @ModelAttribute("memberDTO") @Valid MemberDTO memberDTO, BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			System.out.println("에러");
+			return "member/join";
+		}
 		memberService.join(vo);
 		return "redirect:/";
 	}
+	
 	
 		
 	// 회원등급변경 

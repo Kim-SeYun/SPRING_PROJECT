@@ -45,47 +45,50 @@
 	
 	
 	<div class="event">
-		<div class="event-box">
-	  		<h2>이벤트 상자 제목</h2>
-	  		<p>이벤트 상자 내용</p>
-	  		<button>더 알아보기</button>
-		</div>
-	
-		<div class="box-container">
-		  <div class="box">
-		    <h2>상자 1 제목</h2>
-		    <p>상자 1 내용</p>
-		    <button>더 알아보기</button>
-		 </div>
-	
-		  <div class="box">
-		    <h2>상자 2 제목</h2>
-		    <p>상자 2 내용</p>
-		    <button>더 알아보기</button>
-		  </div>
-	
+	<h2>이벤트</h2>
+	  <div class="event-box">
+		  <c:set var="maxBno" value="0" />
+		  <c:forEach items="${eventAttach}" var="attach">
+		    <c:if test="${attach.fileType eq 'IMAGE' && attach.bno > maxBno}">
+		      <c:set var="maxBno" value="${attach.bno}" />
+		    </c:if>
+		  </c:forEach>
+		  <c:forEach items="${eventAttach}" var="attach">
+		    <c:if test="${attach.fileType eq 'IMAGE' && attach.bno == maxBno}">
+		      <a href="${contextPath}/event/detail?bno=${attach.bno}">
+		        <img src="${contextPath}/event/imgDisplay?filePath=${attach.filePath}&fileName=${attach.fileName}" style="width: 100%;">
+		      </a>
+		    </c:if>
+		  </c:forEach>
 	</div>
+			
+	<div class="box-container">
+	    <div class="box">
+	      <c:set var="prevBno" value="${maxBno-1}"/>
+	      <c:forEach items="${eventAttach}" var="attach">
+	        <c:if test="${attach.fileType eq 'IMAGE' && attach.bno == prevBno}">
+	          <a href="${contextPath}/event/detail?bno=${attach.bno}">
+	            <img src="${contextPath}/event/imgDisplay?filePath=${attach.filePath}&fileName=${attach.fileName}" style="width: 100%;">
+	          </a>
+	        </c:if>
+	      </c:forEach>
+	    </div>
 	
-  
+	    <div class="box">
+		  <c:set var="twoprev" value="${maxBno-2}"/>
+	      <c:forEach items="${eventAttach}" var="attach">
+	        <c:if test="${attach.fileType eq 'IMAGE' && attach.bno == twoprev}">
+	          <a href="${contextPath}/event/detail?bno=${attach.bno}">
+	            <img src="${contextPath}/event/imgDisplay?filePath=${attach.filePath}&fileName=${attach.fileName}" style="width: 100%;">
+	          </a>
+	        </c:if>
+	      </c:forEach>
+	    </div>
+	  </div>
+	</div>
+
+
 </div>
 
 
-
-  <%-- <div class="row">
-    <div class="col">
-      <a href="${contextPath}/">모텔</a>
-    </div>
-    <div class="col">
-      <a href="${contextPath}/">호텔·리조트</a>
-    </div>
-    <div class="col">
-      <a href="${contextPath}/">펜션</a>
-    </div>
-    <div class="col">
-      <a href="${contextPath}/">게스트하우스</a>
-    </div>
-    <div class="col">
-      <a href="${contextPath}/">캠핑·글램핑</a>
-    </div>
-  </div> --%>
 <%@ include file="layout/footer.jsp" %>

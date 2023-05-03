@@ -12,4 +12,6 @@ public interface MemberRepository {
 	MemberVO read(String memberId);
 
 	List<MemberVO> memberList();
+	
+	void updateMemberInfo(MemberVO vo);
 }

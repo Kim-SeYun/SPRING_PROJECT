@@ -46,7 +46,7 @@
     </li>
    
     <li class="nav-item">
-      <a class="nav-link" href="#">예약내역</a>
+      <a class="nav-link" href="${contextPath}/reserve/reservationDetail">예약내역</a>
     </li>
     
     <li class="nav-item">
@@ -61,6 +61,9 @@
 		        <div class="dropdown-menu dropdown-menu-right">
 		            <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_SUB_ADMIN')">
 		                <a class="dropdown-item" href="${contextPath}/member/admin">관리자페이지</a>
+		            </sec:authorize>
+		            <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_SUB_ADMIN')">
+		                <a class="dropdown-item" href="${contextPath}/member/hotelAdmin">호텔관리페이지</a>
 		            </sec:authorize>
 		            <sec:authorize access="hasAnyRole('ROLE_REGULAR_MEMBER','ROLE_ASSOCIATE_MEMBER')">
 		                <a class="dropdown-item" href="${contextPath}/member/mypage">마이페이지</a>

@@ -36,4 +36,10 @@
 	<select id="memberList" resultMap="memberMap">
 		select * from member_sec
 	</select>
+	
+	<update id="updateMemberInfo">
+		update member_sec 
+		set email=#{email}, phoneNumber=#{phoneNumber}, address=#{address}
+		where memberId = #{memberId}
+	</update>
 </mapper>

@@ -21,6 +21,7 @@ public class MemberVO {
 	private String email;
 	private String name;
 	private String address;
+	private String phoneNumber;
 	private int birth;
 	private boolean enabled;
 	private List<AuthVO> authList;

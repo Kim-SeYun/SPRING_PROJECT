@@ -57,7 +57,11 @@ public class MemberService {
 	public List<MemberVO> memberList() {
 		return memberRepository.memberList();
 	}
+	
+	
+	public void updateMemberInfo(MemberVO vo) {
+		memberRepository.updateMemberInfo(vo);
+	}
 
 	
-
 }

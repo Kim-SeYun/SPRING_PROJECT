@@ -6,47 +6,85 @@
 	<div class="jumbotron">
 		<h1>마이페이지</h1>
 	</div>
-	
-	<button type="button" onclick="location.href='${contextPath}/hotel/write'">호텔등록</button>
-	
-	<ul class="hotel-list" style="list-style-type: none;">
-    <c:if test="${not empty attachList}">
-        <c:set var="printedBno" value="" />
-        <c:forEach items="${attachList}" var="attach">
-            <c:if test="${attach.fileType eq 'IMAGE' && attach.bno ne printedBno}">
-                <c:set var="printedBno" value="${attach.bno}" />
-                <li style="margin-bottom: 50px; position: relative;">
-                	<a href="${contextPath}/hotel/detail?bno=${attach.bno}">
-                    <img src="${contextPath}/hotel/imgDisplay?filePath=${attach.filePath}&fileName=${attach.fileName}" style="width: 600px; height: 200px;"></a>
-                    <div style="position: absolute; bottom: 0; left: 0; padding: 5px;">
-                        <h3 style="margin: 0;">
-                            <c:forEach items="${list}" var="h">
-                                <c:if test="${h.bno eq attach.bno}">
-                                    ${h.name}
-                                </c:if>
-                            </c:forEach>
-                        </h3>
-                        <p style="margin: 0;">
-                            <c:forEach items="${list}" var="h">
-                                <c:if test="${h.bno eq attach.bno}">
-                                    ${h.address}
-                                </c:if>
-                            </c:forEach>
-                        </p>
-                    </div>
-                </li>
-            </c:if>
-        </c:forEach>
-    </c:if>
-</ul>
+	<form id="viewForm" class="container" action="${contextPath}/member/modMember" method="post">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+	  
+	  <div class="form-group">
+	    <label for="memberId">아이디:</label>
+	    <input type="hidden" name="memberId" value="${memberInfo.memberId}">
+	    <input type="text" class="form-control" id="memberId"  value="${memberInfo.memberId}" disabled>
+	  </div>
+	  <div class="form-group">
+	    <label for="name">이름:</label>
+	    <input type="text" class="form-control" id="name" value="${memberInfo.name}" disabled>
+	  </div>
+		<div class="form-group">
+		  <label for="email">이메일:</label>
+		  <input type="email" class="form-control" id="email" name="email" value="${memberInfo.email}" disabled>
+		</div>
+		<div class="form-group">
+		  <label for="phoneNumber">전화번호:</label>
+		  <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" value="${memberInfo.phoneNumber}" disabled>
+		</div>
+		<div class="form-group">
+		  <label for="address">주소:</label>
+		  <input type="text" class="form-control" id="address" name="address" value="${memberInfo.address}" disabled>
+		</div>
 
+ 		
+		<div>
+			<button type="button" class="btn btn-info float-right toModForm">수정하기</button>
+		</div>
+		<div class="viewMode">
+			<input type="submit" class="btn btn-primary float-right" value="수정"> 
+			<button type="button" class="btn btn-secondary float-right backViewMode">취소</button>			
+		</div>	  
+	  
+  </form>
 
-		
-		
-		<c:if test="${empty attachList}">
-			<b>등록된 호텔이 없습니다.</b>
-		</c:if>
-		
 </div>
+	
+	
 
 <%@ include file="../layout/footer.jsp" %>
+
+<script>
+$(function() {
+	$('.viewMode').hide();
+	$('.modAddr').hide();
+	$('input[name="email"],input[name="phoneNumber"],input[name="address"]').prop("disabled", true);
+	
+	let viewForm = $('#viewForm');
+	
+	let emailObj = $('input[name="email"]');
+	let phoneObj = $('input[name="phoneNumber"]');
+	let addressObj = $('input[name="address"]');
+	
+	let emailVal = emailObj.val();
+	let phoneVal = phoneObj.val();
+	let addressVal = addressObj.val(); 
+	
+	// 수정모드
+	$('.toModForm').on('click', function(){
+		$('input[name="email"],input[name="phoneNumber"],input[name="address"]').prop("disabled", false);
+		$('.originAddr').hide();
+		$('.modAddr').show();
+		$('.toModForm').hide();
+		$('.viewMode').show();
+	});
+	
+	
+	// 뷰모드
+	$('.backViewMode').on('click', function(){
+		$('input[name="email"],input[name="phoneNumber"],input[name="address"]').prop("disabled", true);
+		$('.viewMode').hide();
+		$('.toModForm').show();
+		$('.modAddr').hide();
+		$('.originAddr').show();
+		emailObj.val(emailVal);
+		addressObj.val(addressVal);
+		phoneObj.val(phoneVal);
+	});
+	
+});
+</script>

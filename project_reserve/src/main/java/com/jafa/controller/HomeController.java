@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.jafa.domain.AttachVO;
 import com.jafa.domain.Criteria;
 import com.jafa.domain.HotelAttachVO;
 import com.jafa.domain.Pagination;
 import com.jafa.repository.HotelRepository;
+import com.jafa.service.AttachService;
+import com.jafa.service.EventService;
 import com.jafa.service.HotelAttachService;
 
 @Controller
@@ -26,8 +29,17 @@ public class HomeController {
 	@Autowired
 	HotelAttachService hotelAttachService;
 	
+	@Autowired
+	EventService eventService;
+	
+	@Autowired
+	AttachService attachService;
+	
 	@GetMapping("/")
 	public String home(Model model) {
+		List<AttachVO> eventAttach = attachService.listAll();
+		System.out.println(eventAttach);
+		model.addAttribute("eventAttach", eventAttach);
 		return "index";
 	}
 	
