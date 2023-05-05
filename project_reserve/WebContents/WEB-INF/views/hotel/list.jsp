@@ -58,15 +58,6 @@ button[type="submit"]:hover {
 
 	
 </style>
-<!--     <div class="form-group">
-      <label for="location">지역</label>
-      <select name="region">
-      <option value="seoul">서울</option>
-      <option value="busan">부산</option>
-      <option value="jeju">제주</option>
-      <option value="daegu">대구</option>
-    </select>
-    </div> -->
 
 <div class="container">
 <div class="row">
@@ -75,12 +66,12 @@ button[type="submit"]:hover {
 		  <form action="${contextPath}/list/${category}" method="get">
 		    <div class="form-group">
 		      <label for="check-in">체크인</label>
-		      <input type="date" name="checkin_date" value="${param.checkin_date == null ? today : param.checkin_date}" onchange="updateCheckoutDate()">
+		      <input type="date" name="checkinDate" value="${param.checkinDate == null ? today : param.checkinDate}" onchange="updateCheckoutDate()">
 		    </div>
 		    <div class="form-group">
 		      <label for="check-out">체크아웃</label>
-		      <input type="date" name="checkout_date" value="${param.checkout_date == null ? tomorrow : param.checkout_date}">
-		    </div>
+		      <input type="date" name="checkoutDate" value="${param.checkoutDate == null ? tomorrow : param.checkoutDate}">
+		    </div> 
 		    <div class="form-group">
 		      <label for="capacity">인원</label>
 		      <select id="capacity" name="capacity">
@@ -93,9 +84,9 @@ button[type="submit"]:hover {
 		    </div>
 			<div class="form-group">
 		        <label for="room_type">배드타입</label>
-		        <input type="checkbox" name="room_type" value="single" ${param.bed_type == 'single' ? 'checked' : ''}>싱글
-		        <input type="checkbox" name="room_type" value="double" ${param.bed_type == 'double' ? 'checked' : ''}>더블
-		        <input type="checkbox" name="room_type" value="twin" ${param.bed_type == 'twin' ? 'checked' : ''}>트윈
+		        <input type="checkbox" name="roomType" value="single" ${paramValues.roomType[0] == 'single' ? 'checked' : ''}>싱글
+		        <input type="checkbox" name="roomType" value="double" ${paramValues.roomType[1] == 'double' ? 'checked' : ''}>더블
+		        <input type="checkbox" name="roomType" value="twin" ${paramValues.roomType[2] == 'twin' ? 'checked' : ''}>트윈
 	        </div>
 		    <div class="form-group">
 		      <button type="submit">검색</button>

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jafa.domain.AttachVO;
+import com.jafa.domain.Criteria;
 import com.jafa.domain.HotelAttachVO;
 import com.jafa.repository.HotelAttachRepository;
 
@@ -21,6 +22,10 @@ public class HotelAttachService {
 	
 	public List<HotelAttachVO> listAll(String category){
 		return hotelAttachRepository.listAll(category);
+	}
+	
+	public List<HotelAttachVO> serachConditionList(Criteria criteria){
+		return hotelAttachRepository.serachConditionList(criteria);
 	}
 	
 

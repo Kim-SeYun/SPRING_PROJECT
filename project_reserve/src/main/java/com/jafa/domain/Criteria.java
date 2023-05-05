@@ -1,5 +1,7 @@
 package com.jafa.domain;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +18,17 @@ public class Criteria {
 	private String category;
 	private String type;
 	private String keyword;
+	
+	private String checkinDate;
+	private String checkoutDate;
+	private String capacity;
+	private List<String> roomType; 
+	
+	// 예약 불가능 객실 번호 
+	private List<Long> unreservableRooms;
+	
+	// 예약가능 호텔 번호
+	private List<Long> reservableBno;
 
 	
 	public Criteria() {

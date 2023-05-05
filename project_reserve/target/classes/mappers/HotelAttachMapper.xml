@@ -27,5 +27,21 @@
 		</if>
 	</select>
 	
+	<select id="serachConditionList" resultType="hotelAttachVO">
+		SELECT * FROM hotel_attach
+		 <where>
+			<if test="category != null and category != ''">
+				AND category = #{category}
+			</if>
+			<if test="reservableBno != null and reservableBno.size() > 0">
+				AND bno IN
+				<foreach item="bno" collection="reservableBno" open="(" separator="," close=")">
+					#{bno}
+				</foreach>
+			</if>
+		</where>
+
+	</select>
+	
 	
 </mapper>

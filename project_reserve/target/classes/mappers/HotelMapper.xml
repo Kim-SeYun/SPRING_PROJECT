@@ -5,37 +5,38 @@
   
 <mapper namespace="com.jafa.repository.HotelRepository">
 	<sql id="condition">
-		<trim prefix="and">
-			<choose>
-				<when test="type=='N'.toString()">
-					name like '%' ||#{keyword}||'%'
-				</when>
-				<when test="type=='A'.toString()">
-					address like '%' ||#{keyword}||'%'
-				</when>
-				<when test="type=='P'.toString()">
-					price like '%' ||#{keyword}||'%'
-				</when>
-			</choose>
-		</trim>
 		 <if test="category != null and category != ''">
 		   and category = #{category}
 		 </if>
 	</sql>
 
 	<select id="list" resultType="hotelVO">
-		select * from hotel_reserve 
+		SELECT room.room_id, room.room_type, 
+			   reserve.bno, reserve.category, reserve.name, reserve.address, reserve.attachfilecnt
+		FROM HOTEL_RESERVE reserve
+		INNER JOIN hotel_ROOM room  ON room.bno = reserve.bno
 		<where>
-	    	<include refid="condition"/>
-	    </where>
+			<if test="unreservableRooms != null and unreservableRooms.size()>0">
+				and room.room_id not in
+				<foreach item="roomId" collection="unreservableRooms" open="(" separator="," close=")">
+					#{roomId}
+				</foreach> 
+			</if>
+			<if test="category != null and category != ''">
+			   and reserve.category = #{category}
+			</if>
+			<if test="roomType != null and roomType.size() > 0 != ''">
+				and room.room_type in
+				<foreach item="item" collection="roomType" open="(" separator="," close=")">
+					#{item}
+				</foreach>	
+			</if>
+			<if test="capacity != null and capacity != ''">
+				and capacity >= #{capacity}
+			</if>
+		</where>
 	</select>
 	
-	<select id="getTotalCount" resultType="int">
-		select count(*) from hotel_reserve
-		<where>
-	    	<include refid="condition"/>
-	    </where>
-	</select>
 	
 	<update id="updateAttachFileCnt">
     	update hotel_reserve 

@@ -32,7 +32,12 @@
 		FROM dual
 	</select>
 	
-	
+	<select id="searchUneservableRooms" resultType="java.lang.Long">
+		SELECT room_id
+     	FROM hotel_booking 
+      	WHERE checkin BETWEEN #{checkinDate} AND #{checkoutDate}
+      	or checkout BETWEEN #{checkinDate} AND #{checkoutDate}
+	</select>
 	
 	
 	

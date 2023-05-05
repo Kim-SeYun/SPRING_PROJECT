@@ -10,8 +10,6 @@ public interface HotelRepository {
 	// 게시물 목록
 	List<HotelVO> list(Criteria criteria);
 	
-	int getTotalCount(Criteria criteria);
-	
 	void write(HotelVO vo);
 	
 	void updateAttachFileCnt(Long bno);
